@@ -1,360 +1,501 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hakan Aytaş - Portföy</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hakan Aytaş - Portföy</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+  @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 
-    /* Temel reset */
-    * {
-      box-sizing: border-box;
+  /* Reset */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #121212;
+    color: #e0e0e0;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  a {
+    color: #1db954;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  a:hover {
+    color: #1ed760;
+  }
+  /* Container */
+  .container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px 15px 60px;
+  }
+  /* Header */
+  header {
+    background: #181818;
+    padding: 30px 15px;
+    text-align: center;
+    border-bottom: 2px solid #1db954;
+  }
+  header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    letter-spacing: 2px;
+  }
+  header p {
+    font-size: 1.2rem;
+    color: #a0a0a0;
+  }
+  /* Sosyal medya */
+  .social {
+    margin-top: 15px;
+  }
+  .social a {
+    font-size: 1.8rem;
+    margin: 0 15px;
+    display: inline-block;
+    color: #a0a0a0;
+  }
+  .social a:hover {
+    color: #1db954;
+  }
+  /* Section Titles */
+  section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    border-left: 5px solid #1db954;
+    padding-left: 12px;
+  }
+  /* Personal Info & Education */
+  .info-list {
+    list-style: none;
+    max-width: 600px;
+    margin-bottom: 40px;
+  }
+  .info-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid #333;
+    font-size: 1.1rem;
+  }
+  /* Goals */
+  .goals {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 900px;
+  }
+  .goal {
+    background: #1db954;
+    color: #121212;
+    flex: 1 1 220px;
+    padding: 20px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 12px rgb(29 185 84 / 0.5);
+    transition: background 0.3s ease;
+  }
+  .goal span {
+    font-size: 2rem;
+  }
+  .goal:hover {
+    background: #1ed760;
+  }
+  /* Projects Grid */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 25px;
+  }
+  .project-card {
+    background: #181818;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgb(0 0 0 / 0.7);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgb(29 185 84 / 0.8);
+  }
+  .project-image {
+    height: 160px;
+    background: #333;
+    overflow: hidden;
+  }
+  .project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .project-card:hover .project-image img {
+    transform: scale(1.05);
+  }
+  .project-content {
+    padding: 18px 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .project-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #1db954;
+  }
+  .project-desc {
+    flex-grow: 1;
+    font-size: 1rem;
+    color: #bbb;
+    margin-bottom: 15px;
+  }
+  .project-link {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #1db954;
+    align-self: flex-start;
+  }
+  .project-link i {
+    margin-left: 6px;
+  }
+  /* Responsive */
+  @media (max-width: 600px) {
+    header h1 {
+      font-size: 2.2rem;
     }
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: #121212;
-      color: #f5c518; /* Sarı */
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+    .goal {
+      font-size: 1rem;
+      padding: 15px;
     }
-    a {
-      color: #f5c518;
-      text-decoration: none;
-      transition: color 0.3s ease;
+    .goal span {
+      font-size: 1.6rem;
     }
-    a:hover {
-      color: #fff;
-    }
-
-    header {
-      background-color: #000;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.8);
-    }
-    header .logo {
-      font-weight: 600;
-      font-size: 1.8rem;
-      letter-spacing: 1px;
-    }
-    header .contact-info {
-      text-align: right;
-      font-size: 0.9rem;
-      line-height: 1.3;
-    }
-    header .contact-info a {
-      display: inline-block;
-      margin-left: 1rem;
-      font-weight: 600;
-    }
-
-    main {
-      flex: 1;
-      max-width: 1100px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-      width: 100%;
-    }
-
-    /* Kategori menüsü */
-    .categories {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-bottom: 2rem;
-      justify-content: center;
-    }
-    .category-btn {
-      background-color: #222;
-      border: 2px solid #f5c518;
-      color: #f5c518;
-      padding: 0.6rem 1.5rem;
-      border-radius: 30px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      user-select: none;
-      min-width: 120px;
-      text-align: center;
-    }
-    .category-btn:hover,
-    .category-btn.active {
-      background-color: #f5c518;
-      color: #121212;
-    }
-
-    /* Uygulamalar grid */
-    .apps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-      gap: 1.5rem;
-    }
-    .app-card {
-      background-color: #222;
-      border-radius: 12px;
-      padding: 1.2rem 1rem;
-      box-shadow: 0 4px 10px rgba(245,197,24,0.3);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.3s ease;
-    }
-    .app-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 8px 20px rgba(245,197,24,0.6);
-    }
-    .app-title {
-      font-weight: 700;
-      font-size: 1.2rem;
-      margin-bottom: 0.6rem;
-      color: #f5c518;
-    }
-    .app-desc {
-      font-size: 0.95rem;
-      margin-bottom: 1rem;
-      color: #ddd;
-      flex-grow: 1;
-    }
-    .app-link {
-      align-self: flex-start;
-      background-color: #f5c518;
-      color: #121212;
-      padding: 0.5rem 1rem;
-      border-radius: 25px;
-      font-weight: 600;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      transition: background-color 0.3s ease;
-    }
-    .app-link:hover {
-      background-color: #d4af37;
-    }
-
-    /* Footer */
-    footer {
-      background-color: #000;
-      color: #666;
-      text-align: center;
-      padding: 1rem 1rem;
-      font-size: 0.9rem;
-      margin-top: auto;
-      user-select: none;
-    }
-
-    /* Responsive */
-    @media (max-width: 600px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-      }
-      header .contact-info {
-        text-align: left;
-        font-size: 0.85rem;
-      }
-      .category-btn {
-        min-width: 100px;
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <header>
-    <div class="logo">
-      Hakan Aytaş
-      <div style="font-weight:400; font-size:0.9rem; color:#f5c518aa;">Diyarbakır / Bağlar - CodeBug Kurucusu</div>
+
+<header>
+  <h1>Hakan Aytaş</h1>
+  <p>Diyarbakır / Bağlar - CodeBug Şirketi Kurucusu</p>
+  <div class="social" aria-label="Sosyal Medya">
+    <a href="https://www.instagram.com/hakan21aytas/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.youtube.com/@hakan21aytas" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    <a href="https://www.facebook.com/hakan.aytas.7" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+  </div>
+</header>
+
+<main class="container" role="main">
+
+  <section aria-labelledby="personal-info-title">
+    <h2 id="personal-info-title">Kişisel Bilgiler</h2>
+    <ul class="info-list">
+      <li><strong>Doğum Tarihi:</strong> 21 Mayıs 1997 (Resmi: 01.03.1999)</li>
+      <li><strong>Konum:</strong> Diyarbakır / Bağlar</li>
+      <li><strong>İlgi Alanı:</strong> Yapay Zeka</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="education-title">
+    <h2 id="education-title">Eğitim Bilgileri</h2>
+    <ul class="info-list">
+      <li><strong>İlkokul:</strong> Hüseyin Uluğ İlkokulu</li>
+      <li><strong>Lise:</strong> Tesisat Teknolojisi ve İklimlendirme - Soğutma Sistemleri (2017)</li>
+      <li><strong>Üniversite:</strong> Dicle Üniversitesi - Muhasebe ve Vergi Uygulamaları (2020)</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="goals-title">
+    <h2 id="goals-title">Hedeflerim</h2>
+    <div class="goals">
+      <div class="goal"><span>🍞</span> Tost Dükkanı Açmak</div>
+      <div class="goal"><span>📱</span> Instagram & TikTok Benzeri Sosyal Medya Uygulaması</div>
+      <div class="goal"><span>🎤</span> Diyarbakır'da Karaoke Mekanları</div>
+      <div class="goal"><span>🎬</span> Global Yayın Yapan YouTube Kanalı</div>
     </div>
-    <div class="contact-info">
-      <div>İletişim:</div>
-      <div>
-        <a href="https://www.instagram.com/hakan21aytas/" target="_blank" rel="noopener">Instagram</a> |
-        <a href="https://www.youtube.com/@hakan21aytas" target="_blank" rel="noopener">YouTube</a>
-      </div>
+  </section>
+
+  <section aria-labelledby="projects-title">
+    <h2 id="projects-title">Projelerim</h2>
+    <div class="projects-grid">
+
+      <!-- Proje Kartları -->
+      <article class="project-card">
+        <a href="https://hakanaytas.github.io/AdisyonBeta/" target="_blank" rel="noopener" aria-label="Adisyon Programı">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/400x160?text=Adisyon+Programı" alt="Adisyon Programı" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Adisyon Programı</h3>
+            <p class="project-desc">Restoranlar için adisyon takibi uygulaması.</p>
+            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+      </article>
+
+      <article class="project-card">
+        <a href="https://hakanaytas.github.io/avans-hesaplama/" target="_blank" rel="noopener" aria-label="Nakit Avans Hesaplama">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/400x160?text=Nakit+Avans+Hesaplama" alt="Nakit Avans Hesaplama" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Nakit Avans Hesaplama</h3>
+            <p class="project-desc">Nakit avans hesaplama aracı.</p>
+            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+      </article>
+
+      <article class="project-card">
+        <a href="https://hakanaytas.github.io/whatsaap-analiz-pro/" target="_blank" rel="noopener" aria-label="WhatsApp Kelime Analizi">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/400x160?text=WhatsApp+Kelime+Analizi" alt="WhatsApp Kelime Analizi" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">WhatsApp Kelime Analizi</h3>
+            <p class="project-desc">WhatsApp sohbet kelime analiz aracı.</p>
+            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+      </article>
+
+      <article class="project-card">
+        <a href="https://hakanaytas.github.io/bakkal-al-sat/" target="_blank" rel="noopener" aria-label="Al Sat Uygulaması">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/400x160?text=Al+Sat+Uygulaması" alt="Al Sat Uygulaması" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Al Sat Uygulaması</h3>
+            <p class="project-desc">Bakkal için al-sat uygulaması.</p>
+            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+      </article>
+
+      <article class="project-card">
+        <a href="https://hakanaytas.github.io/sosyalmedyas-tes-/" target="_blank" rel="noopener" aria-label="Sosyal Medya Uygulaması Linç">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/400x160?text=Sosyal+Medya+Uygulaması" alt="Sosyal Medya Uygulaması Linç" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Sosyal Medya Uygulaması "Linç"</h3>
+            <p class="project-desc">Sosyal medya platformu denemesi.</p>
+            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+      </article>
+
+      <article class="project-card">
+        <a href="https://hakanaytas.github.io/damat-rkiyee/" target="_blank" rel="noopener" aria-label="Dama Oyunu">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/400x160?text=Dama+Oyunu" alt="Dama Oyunu" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Dama Oyunu</h3>
+            <p class="project-desc">Klasik dama oyunu.</p>
+            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+      </article>
+
+      <article class="project-card">
+        <a href="https://hakanaytas.github.io/zikirmatik/" target="_blank" rel="noopener" aria-label="Zikirmatik">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/400x160?text=Zikirmatik" alt="Zikirmatik" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Zikirmatik</h3>
+            <p class="project-desc">Dijital zikirmatik uygulaması.</p>
+            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+      </article>
+
+      <article class="project-card">
+        <a href="https://hakanaytas.github.io/manifesto/" target="_blank" rel="noopener" aria-label="Manifesto">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/400x160?text=Manifesto" alt="Manifesto" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Yapacaklarım ve Olacak Listem</h3>
+            <p class="project-desc">Kişisel manifesto ve planlar.</p>
+            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+      </article>
+
+      <article class="project-card">
+        <a href="https://hakanaytas.github.io/YKS-Test/" target="_blank" rel="noopener" aria-label="YKS Test">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/400x160?text=YKS+Test" alt="YKS Test" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">YKS Öğrencilerine Özel Soru Bankası</h3>
+            <p class="project-desc">YKS hazırlık soru bankası.</p>
+            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+      </article>
+
+      <article class="project-card">
+        <a href="https://hakanaytas.github.io/tostopia-adioo/" target="_blank" rel="noopener" aria-label="Tost Dükkanı Adisyon Programı">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/400x160?text=Tost+Dükkanı+Adisyon" alt="Tost Dükkanı Adisyon" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Tost Dükkanı Adisyon Programı</h3>
+            <p class="project-desc">Tost dükkanı için adisyon programı.</p>
+            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+      </article>
+
+      <article class="project-card">
+        <a href="https://hakanaytas.github.io/-kran-hakan-d-m-davetiyesi/" target="_blank" rel="noopener" aria-label="Düğün Davetiyesi">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/400x160?text=Düğün+Davetiyesi" alt="Düğün Davetiyesi" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Düğün Davetiyesi</h3>
+            <p class="project-desc">Kişisel düğün davetiyesi sitesi.</p>
+            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+      </article>
+
+      <article class="project-card">
+        <a href="https://hakanaytas.github.io/suat-ayta--vafat-sayac-/" target="_blank" rel="noopener" aria-label="Vefat Sayacı">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/400x160?text=Vefat+Sayacı" alt="Vefat Sayacı" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Babamın Vefat Sayacı</h3>
+            <p class="project-desc">Anma ve sayım uygulaması.</p>
+            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+      </article>
+
+      <article class="project-card">
+        <a href="https://hakanaytas.github.io/cafeadisyonadio.git.io/" target="_blank" rel="noopener" aria-label="Cafe Adisyon Programı">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/400x160?text=Cafe+Adisyon+Programı" alt="Cafe Adisyon Programı" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Cafe Adisyon Programı</h3>
+            <p class="project-desc">Kafeler için adisyon takibi uygulaması.</p>
+            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+      </article>
+
+      <article class="project-card">
+        <a href="https://hakanaytas.github.io/2026s-navsayac-/" target="_blank" rel="noopener" aria-label="2026 Sınav Sayaçları">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/400x160?text=2026+Sınav+Sayaçları" alt="2026 Sınav Sayaçları" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">2026 Sınav Sayaçları</h3>
+            <p class="project-desc">Türkiye'deki 2026 sınavları için geri sayım.</p>
+            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+      </article>
+
+      <article class="project-card">
+        <a href="https://hakanaytas.github.io/plaketolusturucu/" target="_blank" rel="noopener" aria-label="Plaket Oluşturucu">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/400x160?text=Plaket+Oluşturucu" alt="Plaket Oluşturucu" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Plaket Oluşturucu</h3>
+            <p class="project-desc">Özelleştirilebilir plaket tasarlama aracı.</p>
+            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+      </article>
+
+      <article class="project-card">
+        <a href="https://hakanaytas.github.io/Hesaplama-Ara-lar-/" target="_blank" rel="noopener" aria-label="Hesaplama Araçları">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/400x160?text=Hesaplama+Araçları" alt="Hesaplama Araçları" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Hesaplama Araçları</h3>
+            <p class="project-desc">Çeşitli hesaplamalar için pratik araçlar.</p>
+            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+      </article>
+
+      <article class="project-card">
+        <a href="https://hakanaytas.github.io/Allah-a-dua/" target="_blank" rel="noopener" aria-label="Dua Kabul Zikri">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/400x160?text=Dua+Kabul+Zikri" alt="Dua Kabul Zikri" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Dua Kabul Zikri</h3>
+            <p class="project-desc">Dua ve zikir uygulaması.</p>
+            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+      </article>
+
+      <article class="project-card">
+        <a href="https://hakanaytas.github.io/sevg-l-qu-z/" target="_blank" rel="noopener" aria-label="Sevgili ile İlgili Quiz">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/400x160?text=Sevgili+Quiz" alt="Sevgili ile İlgili Quiz" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Sevgili ile İlgili Quiz</h3>
+            <p class="project-desc">İlişki temalı eğlenceli quiz.</p>
+            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+      </article>
+
+      <article class="project-card">
+        <a href="https://hakanaytas.github.io/saat/" target="_blank" rel="noopener" aria-label="Masaüstü Dijital Saat">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/400x160?text=Dijital+Saat" alt="Masaüstü Dijital Saat" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Masaüstü Dijital Saat</h3>
+            <p class="project-desc">Basit ve şık dijital saat uygulaması.</p>
+            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+      </article>
+
+      <article class="project-card">
+        <a href="https://hakanaytas.github.io/seviyor-sevmiyor/" target="_blank" rel="noopener" aria-label="Seviyor Sevmiyor Oyunu">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/400x160?text=Seviyor+Sevmiyor" alt="Seviyor Sevmiyor Oyunu" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Seviyor Sevmiyor Oyunu</h3>
+            <p class="project-desc">Klasik seviyor-sevmiyor falı oyunu.</p>
+            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+      </article>
+
     </div>
-  </header>
+  </section>
 
-  <main>
-    <nav class="categories" aria-label="Uygulama Kategorileri">
-      <button class="category-btn active" data-category="all" aria-pressed="true">Tümü</button>
-      <button class="category-btn" data-category="adisyon">Adisyon</button>
-      <button class="category-btn" data-category="hesaplama">Hesaplama</button>
-      <button class="category-btn" data-category="oyun">Oyun</button>
-      <button class="category-btn" data-category="sosyal">Sosyal Medya</button>
-      <button class="category-btn" data-category="diger">Diğer</button>
-    </nav>
+</main>
 
-    <section class="apps-grid" aria-live="polite" aria-label="Uygulamalar listesi">
-      <!-- Uygulamalar buraya JS ile eklenecek -->
-    </section>
-  </main>
-
-  <footer>
-    &copy; 2024 Hakan Aytaş - Tüm Hakları Saklıdır.
-  </footer>
-
-  <script>
-    const apps = [
-      {
-        title: "Adisyon Programı",
-        desc: "Restoran ve kafe için adisyon programı.",
-        url: "https://hakanaytas.github.io/AdisyonBeta/",
-        category: "adisyon"
-      },
-      {
-        title: "Tost Dükkanı Adisyon Programı",
-        desc: "Tost dükkanı için özel adisyon programı.",
-        url: "https://hakanaytas.github.io/tostopia-adioo/",
-        category: "adisyon"
-      },
-      {
-        title: "Cafe Adisyon Programı",
-        desc: "Cafe için adisyon programı.",
-        url: "https://hakanaytas.github.io/cafeadisyonadio.git.io/",
-        category: "adisyon"
-      },
-      {
-        title: "Nakit Avans Hesaplama",
-        desc: "Nakit avans hesaplama aracı.",
-        url: "https://hakanaytas.github.io/avans-hesaplama/",
-        category: "hesaplama"
-      },
-      {
-        title: "Hesaplama Aracı",
-        desc: "Çeşitli hesaplamalar için araç.",
-        url: "https://hakanaytas.github.io/Hesaplama-Ara-lar-/",
-        category: "hesaplama"
-      },
-      {
-        title: "WhatsApp Kelime Analizi",
-        desc: "WhatsApp kelime analiz uygulaması.",
-        url: "https://hakanaytas.github.io/whatsaap-analiz-pro/",
-        category: "sosyal"
-      },
-      {
-        title: "Sosyal Medya Uygulaması",
-        desc: "Sosyal medya ile ilgili uygulama.",
-        url: "https://hakanaytas.github.io/sosyalmedyas-tes-/",
-        category: "sosyal"
-      },
-      {
-        title: "Sevgili ile İlgili Quiz",
-        desc: "Sevgili ile ilgili eğlenceli quiz.",
-        url: "https://hakanaytas.github.io/sevg-l-qu-z/",
-        category: "sosyal"
-      },
-      {
-        title: "Dama Oyunu",
-        desc: "Klasik dama oyunu.",
-        url: "https://hakanaytas.github.io/damat-rkiyee/",
-        category: "oyun"
-      },
-      {
-        title: "Seviyor Sevmiyor Oyunu",
-        desc: "Eğlenceli seviyor sevmiyor oyunu.",
-        url: "https://hakanaytas.github.io/seviyor-sevmiyor/",
-        category: "oyun"
-      },
-      {
-        title: "Zikirmatik",
-        desc: "Dijital zikirmatik uygulaması.",
-        url: "https://hakanaytas.github.io/zikirmatik/",
-        category: "diger"
-      },
-      {
-        title: "Yapacaklarım ve Olacaklar Listem",
-        desc: "Kişisel yapılacaklar listesi.",
-        url: "https://hakanaytas.github.io/manifesto/",
-        category: "diger"
-      },
-      {
-        title: "YKS Öğrencilerine Özel Soru Bankası",
-        desc: "YKS için soru bankası uygulaması.",
-        url: "https://hakanaytas.github.io/YKS-Test/",
-        category: "diger"
-      },
-      {
-        title: "Düğün Davetiyesi",
-        desc: "Kişisel düğün davetiyesi.",
-        url: "https://hakanaytas.github.io/-kran-hakan-d-m-davetiyesi/",
-        category: "diger"
-      },
-      {
-        title: "Babamın Vefat Sayacı",
-        desc: "Vefat sayacı uygulaması.",
-        url: "https://hakanaytas.github.io/suat-ayta--vafat-sayac-/",
-        category: "diger"
-      },
-      {
-        title: "Türkiye'deki 2026 Sınav Sayaçları",
-        desc: "2026 sınavları için sayaçlar.",
-        url: "https://hakanaytas.github.io/2026s-navsayac-/",
-        category: "diger"
-      },
-      {
-        title: "Plaket Oluşturucu",
-        desc: "Plaket tasarlama uygulaması.",
-        url: "https://hakanaytas.github.io/plaketolusturucu/",
-        category: "diger"
-      },
-      {
-        title: "Dua Kabul Zikri",
-        desc: "Dua kabul zikri uygulaması.",
-        url: "https://hakanaytas.github.io/Allah-a-dua/",
-        category: "diger"
-      },
-      {
-        title: "Masaüstü Dijital Saat",
-        desc: "Masaüstü için dijital saat.",
-        url: "https://hakanaytas.github.io/saat/",
-        category: "diger"
-      }
-    ];
-
-    const appsGrid = document.querySelector('.apps-grid');
-    const categoryButtons = document.querySelectorAll('.category-btn');
-
-    function renderApps(filterCategory) {
-      appsGrid.innerHTML = '';
-      const filteredApps = filterCategory === 'all' ? apps : apps.filter(app => app.category === filterCategory);
-      if(filteredApps.length === 0) {
-        appsGrid.innerHTML = '<p style="color:#f5c518cc; font-style:italic;">Bu kategoride uygulama bulunmamaktadır.</p>';
-        return;
-      }
-      filteredApps.forEach(app => {
-        const card = document.createElement('article');
-        card.className = 'app-card';
-        card.innerHTML = `
-          <h3 class="app-title">${app.title}</h3>
-          <p class="app-desc">${app.desc}</p>
-          <a class="app-link" href="${app.url}" target="_blank" rel="noopener">Siteye Git</a>
-        `;
-        appsGrid.appendChild(card);
-      });
-    }
-
-    categoryButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        categoryButtons.forEach(b => {
-          b.classList.remove('active');
-          b.setAttribute('aria-pressed', 'false');
-        });
-        btn.classList.add('active');
-        btn.setAttribute('aria-pressed', 'true');
-        renderApps(btn.dataset.category);
-      });
-    });
-
-    // İlk yüklemede tüm uygulamaları göster
-    renderApps('all');
-  </script>
 </body>
 </html>
