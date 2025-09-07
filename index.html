@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hakan Aytaş - Portföy</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    /* Temel reset */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #121212;
+      color: #f5c518; /* Sarı */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a {
+      color: #f5c518;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #fff;
+    }
+
+    header {
+      background-color: #000;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    }
+    header .logo {
+      font-weight: 600;
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+    }
+    header .contact-info {
+      text-align: right;
+      font-size: 0.9rem;
+      line-height: 1.3;
+    }
+    header .contact-info a {
+      display: inline-block;
+      margin-left: 1rem;
+      font-weight: 600;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      width: 100%;
+    }
+
+    /* Kategori menüsü */
+    .categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      justify-content: center;
+    }
+    .category-btn {
+      background-color: #222;
+      border: 2px solid #f5c518;
+      color: #f5c518;
+      padding: 0.6rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+      min-width: 120px;
+      text-align: center;
+    }
+    .category-btn:hover,
+    .category-btn.active {
+      background-color: #f5c518;
+      color: #121212;
+    }
+
+    /* Uygulamalar grid */
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 1.5rem;
+    }
+    .app-card {
+      background-color: #222;
+      border-radius: 12px;
+      padding: 1.2rem 1rem;
+      box-shadow: 0 4px 10px rgba(245,197,24,0.3);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease;
+    }
+    .app-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(245,197,24,0.6);
+    }
+    .app-title {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 0.6rem;
+      color: #f5c518;
+    }
+    .app-desc {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      color: #ddd;
+      flex-grow: 1;
+    }
+    .app-link {
+      align-self: flex-start;
+      background-color: #f5c518;
+      color: #121212;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      transition: background-color 0.3s ease;
+    }
+    .app-link:hover {
+      background-color: #d4af37;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #000;
+      color: #666;
+      text-align: center;
+      padding: 1rem 1rem;
+      font-size: 0.9rem;
+      margin-top: auto;
+      user-select: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+      header .contact-info {
+        text-align: left;
+        font-size: 0.85rem;
+      }
+      .category-btn {
+        min-width: 100px;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      Hakan Aytaş
+      <div style="font-weight:400; font-size:0.9rem; color:#f5c518aa;">Diyarbakır / Bağlar - CodeBug Kurucusu</div>
+    </div>
+    <div class="contact-info">
+      <div>İletişim:</div>
+      <div>
+        <a href="https://www.instagram.com/hakan21aytas/" target="_blank" rel="noopener">Instagram</a> |
+        <a href="https://www.youtube.com/@hakan21aytas" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <nav class="categories" aria-label="Uygulama Kategorileri">
+      <button class="category-btn active" data-category="all" aria-pressed="true">Tümü</button>
+      <button class="category-btn" data-category="adisyon">Adisyon</button>
+      <button class="category-btn" data-category="hesaplama">Hesaplama</button>
+      <button class="category-btn" data-category="oyun">Oyun</button>
+      <button class="category-btn" data-category="sosyal">Sosyal Medya</button>
+      <button class="category-btn" data-category="diger">Diğer</button>
+    </nav>
+
+    <section class="apps-grid" aria-live="polite" aria-label="Uygulamalar listesi">
+      <!-- Uygulamalar buraya JS ile eklenecek -->
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2024 Hakan Aytaş - Tüm Hakları Saklıdır.
+  </footer>
+
+  <script>
+    const apps = [
+      {
+        title: "Adisyon Programı",
+        desc: "Restoran ve kafe için adisyon programı.",
+        url: "https://hakanaytas.github.io/AdisyonBeta/",
+        category: "adisyon"
+      },
+      {
+        title: "Tost Dükkanı Adisyon Programı",
+        desc: "Tost dükkanı için özel adisyon programı.",
+        url: "https://hakanaytas.github.io/tostopia-adioo/",
+        category: "adisyon"
+      },
+      {
+        title: "Cafe Adisyon Programı",
+        desc: "Cafe için adisyon programı.",
+        url: "https://hakanaytas.github.io/cafeadisyonadio.git.io/",
+        category: "adisyon"
+      },
+      {
+        title: "Nakit Avans Hesaplama",
+        desc: "Nakit avans hesaplama aracı.",
+        url: "https://hakanaytas.github.io/avans-hesaplama/",
+        category: "hesaplama"
+      },
+      {
+        title: "Hesaplama Aracı",
+        desc: "Çeşitli hesaplamalar için araç.",
+        url: "https://hakanaytas.github.io/Hesaplama-Ara-lar-/",
+        category: "hesaplama"
+      },
+      {
+        title: "WhatsApp Kelime Analizi",
+        desc: "WhatsApp kelime analiz uygulaması.",
+        url: "https://hakanaytas.github.io/whatsaap-analiz-pro/",
+        category: "sosyal"
+      },
+      {
+        title: "Sosyal Medya Uygulaması",
+        desc: "Sosyal medya ile ilgili uygulama.",
+        url: "https://hakanaytas.github.io/sosyalmedyas-tes-/",
+        category: "sosyal"
+      },
+      {
+        title: "Sevgili ile İlgili Quiz",
+        desc: "Sevgili ile ilgili eğlenceli quiz.",
+        url: "https://hakanaytas.github.io/sevg-l-qu-z/",
+        category: "sosyal"
+      },
+      {
+        title: "Dama Oyunu",
+        desc: "Klasik dama oyunu.",
+        url: "https://hakanaytas.github.io/damat-rkiyee/",
+        category: "oyun"
+      },
+      {
+        title: "Seviyor Sevmiyor Oyunu",
+        desc: "Eğlenceli seviyor sevmiyor oyunu.",
+        url: "https://hakanaytas.github.io/seviyor-sevmiyor/",
+        category: "oyun"
+      },
+      {
+        title: "Zikirmatik",
+        desc: "Dijital zikirmatik uygulaması.",
+        url: "https://hakanaytas.github.io/zikirmatik/",
+        category: "diger"
+      },
+      {
+        title: "Yapacaklarım ve Olacaklar Listem",
+        desc: "Kişisel yapılacaklar listesi.",
+        url: "https://hakanaytas.github.io/manifesto/",
+        category: "diger"
+      },
+      {
+        title: "YKS Öğrencilerine Özel Soru Bankası",
+        desc: "YKS için soru bankası uygulaması.",
+        url: "https://hakanaytas.github.io/YKS-Test/",
+        category: "diger"
+      },
+      {
+        title: "Düğün Davetiyesi",
+        desc: "Kişisel düğün davetiyesi.",
+        url: "https://hakanaytas.github.io/-kran-hakan-d-m-davetiyesi/",
+        category: "diger"
+      },
+      {
+        title: "Babamın Vefat Sayacı",
+        desc: "Vefat sayacı uygulaması.",
+        url: "https://hakanaytas.github.io/suat-ayta--vafat-sayac-/",
+        category: "diger"
+      },
+      {
+        title: "Türkiye'deki 2026 Sınav Sayaçları",
+        desc: "2026 sınavları için sayaçlar.",
+        url: "https://hakanaytas.github.io/2026s-navsayac-/",
+        category: "diger"
+      },
+      {
+        title: "Plaket Oluşturucu",
+        desc: "Plaket tasarlama uygulaması.",
+        url: "https://hakanaytas.github.io/plaketolusturucu/",
+        category: "diger"
+      },
+      {
+        title: "Dua Kabul Zikri",
+        desc: "Dua kabul zikri uygulaması.",
+        url: "https://hakanaytas.github.io/Allah-a-dua/",
+        category: "diger"
+      },
+      {
+        title: "Masaüstü Dijital Saat",
+        desc: "Masaüstü için dijital saat.",
+        url: "https://hakanaytas.github.io/saat/",
+        category: "diger"
+      }
+    ];
+
+    const appsGrid = document.querySelector('.apps-grid');
+    const categoryButtons = document.querySelectorAll('.category-btn');
+
+    function renderApps(filterCategory) {
+      appsGrid.innerHTML = '';
+      const filteredApps = filterCategory === 'all' ? apps : apps.filter(app => app.category === filterCategory);
+      if(filteredApps.length === 0) {
+        appsGrid.innerHTML = '<p style="color:#f5c518cc; font-style:italic;">Bu kategoride uygulama bulunmamaktadır.</p>';
+        return;
+      }
+      filteredApps.forEach(app => {
+        const card = document.createElement('article');
+        card.className = 'app-card';
+        card.innerHTML = `
+          <h3 class="app-title">${app.title}</h3>
+          <p class="app-desc">${app.desc}</p>
+          <a class="app-link" href="${app.url}" target="_blank" rel="noopener">Siteye Git</a>
+        `;
+        appsGrid.appendChild(card);
+      });
+    }
+
+    categoryButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        categoryButtons.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+        renderApps(btn.dataset.category);
+      });
+    });
+
+    // İlk yüklemede tüm uygulamaları göster
+    renderApps('all');
+  </script>
+</body>
+</html>
