@@ -2,500 +2,1402 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Hakan Aytaş - Portföy</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
-  @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hakan Aytaş - Portfolyo</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💛</text></svg>" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  /* Reset */
+<style>
+  /* Kırmızı-Beyaz Pinterest Teması */
+  :root {
+    --primary-red: #E60023;
+    --dark-red: #AD081B;
+    --light-red: #FF4757;
+    --bg-white: #FFFFFF;
+    --bg-light-gray: #F7F7F7;
+    --text-dark: #211922;
+    --text-medium: #5F5F5F;
+    --text-light: #767676;
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-medium: rgba(0, 0, 0, 0.15);
+    --shadow-strong: rgba(0, 0, 0, 0.25);
+    --border-radius: 16px;
+    --card-radius: 12px;
+  }
+
   * {
-    margin: 0; padding: 0; box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
+
   body {
-    font-family: 'Inter', sans-serif;
-    background: #121212;
-    color: #e0e0e0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-light-gray);
+    color: var(--text-dark);
     line-height: 1.6;
-    min-height: 100vh;
+    overflow-x: hidden;
   }
-  a {
-    color: #1db954;
-    text-decoration: none;
-    transition: color 0.3s ease;
+
+  /* Header - Mobil First */
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-white);
+    box-shadow: 0 2px 8px var(--shadow-light);
+    z-index: 1000;
+    padding: 12px 16px;
   }
-  a:hover {
-    color: #1ed760;
-  }
-  /* Container */
-  .container {
-    max-width: 1100px;
-    margin: auto;
-    padding: 20px 15px 60px;
-  }
-  /* Header */
-  header {
-    background: #181818;
-    padding: 30px 15px;
-    text-align: center;
-    border-bottom: 2px solid #1db954;
-  }
-  header h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 5px;
-    letter-spacing: 2px;
-  }
-  header p {
-    font-size: 1.2rem;
-    color: #a0a0a0;
-  }
-  /* Sosyal medya */
-  .social {
-    margin-top: 15px;
-  }
-  .social a {
-    font-size: 1.8rem;
-    margin: 0 15px;
-    display: inline-block;
-    color: #a0a0a0;
-  }
-  .social a:hover {
-    color: #1db954;
-  }
-  /* Section Titles */
-  section h2 {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-    border-left: 5px solid #1db954;
-    padding-left: 12px;
-  }
-  /* Personal Info & Education */
-  .info-list {
-    list-style: none;
-    max-width: 600px;
-    margin-bottom: 40px;
-  }
-  .info-list li {
-    padding: 10px 0;
-    border-bottom: 1px solid #333;
-    font-size: 1.1rem;
-  }
-  /* Goals */
-  .goals {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    max-width: 900px;
-  }
-  .goal {
-    background: #1db954;
-    color: #121212;
-    flex: 1 1 220px;
-    padding: 20px;
-    border-radius: 12px;
-    font-weight: 700;
-    font-size: 1.1rem;
+
+  .header-content {
     display: flex;
     align-items: center;
-    gap: 12px;
-    box-shadow: 0 4px 12px rgb(29 185 84 / 0.5);
-    transition: background 0.3s ease;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
   }
-  .goal span {
-    font-size: 2rem;
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary-red);
+    text-decoration: none;
+    letter-spacing: -0.5px;
   }
-  .goal:hover {
-    background: #1ed760;
+
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    cursor: pointer;
+    padding: 8px;
   }
-  /* Projects Grid */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-    gap: 25px;
-  }
-  .project-card {
-    background: #181818;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgb(0 0 0 / 0.7);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  .nav-menu {
     display: flex;
-    flex-direction: column;
+    gap: 8px;
+    align-items: center;
   }
+
+  .nav-btn {
+    background: var(--bg-light-gray);
+    color: var(--text-dark);
+    padding: 8px 16px;
+    border: none;
+    border-radius: 24px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .nav-btn:hover, .nav-btn.active {
+    background: var(--primary-red);
+    color: var(--bg-white);
+    transform: translateY(-1px);
+  }
+
+  .search-container {
+    display: flex;
+    align-items: center;
+    background: var(--bg-light-gray);
+    border-radius: 24px;
+    padding: 8px 16px;
+    margin: 0 16px;
+    flex: 1;
+    max-width: 400px;
+  }
+
+  .search-input {
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 1rem;
+    color: var(--text-dark);
+    width: 100%;
+  }
+
+  .search-input::placeholder {
+    color: var(--text-light);
+  }
+
+  .search-icon {
+    color: var(--text-light);
+    margin-right: 8px;
+  }
+
+  /* Main Content */
+  .main-content {
+    margin-top: 80px;
+    padding: 20px 16px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Stats Section */
+  .stats-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+    padding: 20px;
+    background: var(--bg-white);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px var(--shadow-light);
+  }
+
+  .stat-item {
+    text-align: center;
+    padding: 16px;
+  }
+
+  .stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary-red);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--text-medium);
+    font-weight: 500;
+  }
+
+  /* Category Filter */
+  .category-filter {
+    margin-bottom: 24px;
+  }
+
+  .category-scroll {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 8px 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .category-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-btn {
+    background: var(--bg-white);
+    border: 2px solid var(--bg-light-gray);
+    padding: 10px 20px;
+    border-radius: 24px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .filter-btn.active {
+    background: var(--primary-red);
+    border-color: var(--primary-red);
+    color: var(--bg-white);
+  }
+
+  .filter-btn:hover:not(.active) {
+    border-color: var(--primary-red);
+    color: var(--primary-red);
+  }
+
+  /* Pinterest Grid Layout */
+  .projects-container {
+    columns: 1;
+    column-gap: 16px;
+    margin: 0 auto;
+  }
+
+  .project-card {
+    display: inline-block;
+    width: 100%;
+    background: var(--bg-white);
+    border-radius: var(--card-radius);
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px var(--shadow-light);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    break-inside: avoid;
+    overflow: hidden;
+    position: relative;
+  }
+
   .project-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 30px rgb(29 185 84 / 0.8);
+    box-shadow: 0 8px 25px var(--shadow-medium);
+    transform: translateY(-2px);
   }
+
+  .project-card.hidden {
+    display: none;
+  }
+
   .project-image {
-    height: 160px;
-    background: #333;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, var(--primary-red), var(--light-red));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--bg-white);
+    position: relative;
     overflow: hidden;
   }
-  .project-image img {
+
+  .project-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.6s;
   }
-  .project-card:hover .project-image img {
-    transform: scale(1.05);
+
+  .project-card:hover .project-image::before {
+    left: 100%;
   }
+
   .project-content {
-    padding: 18px 20px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    padding: 16px;
   }
+
   .project-title {
-    font-size: 1.3rem;
-    font-weight: 700;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dark);
     margin-bottom: 8px;
-    color: #1db954;
+    line-height: 1.3;
   }
-  .project-desc {
-    flex-grow: 1;
-    font-size: 1rem;
-    color: #bbb;
-    margin-bottom: 15px;
+
+  .project-category {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
   }
-  .project-link {
+
+  .project-description {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    line-height: 1.4;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .project-tag {
+    background: var(--bg-light-gray);
+    color: var(--text-medium);
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 500;
+  }
+
+  /* Social Section */
+  .social-section {
+    text-align: center;
+    padding: 40px 20px;
+    background: var(--bg-white);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px var(--shadow-light);
+    margin-top: 40px;
+  }
+
+  .social-title {
+    font-size: 1.5rem;
     font-weight: 700;
-    font-size: 1rem;
-    color: #1db954;
-    align-self: flex-start;
+    color: var(--text-dark);
+    margin-bottom: 24px;
   }
-  .project-link i {
-    margin-left: 6px;
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
   }
-  /* Responsive */
-  @media (max-width: 600px) {
-    header h1 {
-      font-size: 2.2rem;
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    background: var(--primary-red);
+    color: var(--bg-white);
+    border-radius: 50%;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(230, 0, 35, 0.3);
+  }
+
+  .social-link:hover {
+    background: var(--dark-red);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(230, 0, 35, 0.4);
+  }
+
+  /* Modal */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-content {
+    background: var(--bg-white);
+    margin: 5% auto;
+    padding: 24px;
+    border-radius: var(--border-radius);
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+    animation: modalFadeIn 0.3s ease;
+  }
+
+  @keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .close-btn {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-light);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+  }
+
+  .close-btn:hover {
+    background: var(--bg-light-gray);
+    color: var(--text-dark);
+  }
+
+  .modal-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-red);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .info-grid {
+    display: grid;
+    gap: 20px;
+  }
+
+  .info-card {
+    background: var(--bg-light-gray);
+    padding: 20px;
+    border-radius: var(--card-radius);
+  }
+
+  .info-card h3 {
+    color: var(--primary-red);
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  .info-list {
+    list-style: none;
+  }
+
+  .info-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #E0E0E0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .info-list li:last-child {
+    border-bottom: none;
+  }
+
+  .info-list strong {
+    color: var(--text-dark);
+    font-weight: 500;
+  }
+
+  /* Responsive Design */
+  @media (min-width: 768px) {
+    .header-content {
+      padding: 0 24px;
     }
-    .goal {
-      font-size: 1rem;
-      padding: 15px;
+    
+    .main-content {
+      margin-top: 88px;
+      padding: 24px;
     }
-    .goal span {
-      font-size: 1.6rem;
+
+    .projects-container {
+      columns: 2;
+      column-gap: 20px;
     }
+
+    .stats-section {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .search-container {
+      max-width: 500px;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .projects-container {
+      columns: 3;
+      column-gap: 24px;
+    }
+
+    .main-content {
+      padding: 32px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .projects-container {
+      columns: 4;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .nav-toggle {
+      display: block;
+    }
+
+    .nav-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--bg-white);
+      flex-direction: column;
+      padding: 16px;
+      box-shadow: 0 4px 12px var(--shadow-light);
+      transform: translateY(-10px);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .nav-menu.active {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .search-container {
+      margin: 0;
+      order: -1;
+      flex: none;
+      width: 100%;
+      margin-bottom: 16px;
+    }
+
+    .header-content {
+      flex-wrap: wrap;
+    }
+
+    .project-image {
+      height: 180px;
+      font-size: 2.5rem;
+    }
+  }
+
+  /* Loading Animation */
+  .loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .loading.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--bg-light-gray);
+    border-top: 4px solid var(--primary-red);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Scroll to Top */
+  .scroll-to-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 48px;
+    height: 48px;
+    background: var(--primary-red);
+    color: var(--bg-white);
+    border: none;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(230, 0, 35, 0.3);
+  }
+
+  .scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .scroll-to-top:hover {
+    background: var(--dark-red);
+    transform: translateY(-2px);
   }
 </style>
 </head>
 <body>
 
-<header>
-  <h1>Hakan Aytaş</h1>
-  <p>Diyarbakır / Bağlar - CodeBug Şirketi Kurucusu</p>
-  <div class="social" aria-label="Sosyal Medya">
-    <a href="https://www.instagram.com/hakan21aytas/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-    <a href="https://www.youtube.com/@hakan21aytas" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-    <a href="https://www.facebook.com/profile.php?id=61557517211030" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+<!-- Loading Animation -->
+<div class="loading" id="loading">
+  <div class="spinner"></div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-content">
+    <a href="#" class="logo">Hakan Aytaş</a>
+    
+    <div class="search-container">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" class="search-input" placeholder="Proje ara..." id="searchInput">
+    </div>
+
+    <button class="nav-toggle" id="navToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <nav class="nav-menu" id="navMenu">
+      <button class="nav-btn filter-btn active" data-category="all">Tümü</button>
+      <button class="nav-btn filter-btn" data-category="oyun">Oyunlar</button>
+      <button class="nav-btn filter-btn" data-category="hesaplama">Hesaplama</button>
+      <button class="nav-btn filter-btn" data-category="is">İş Araçları</button>
+      <button class="nav-btn filter-btn" data-category="sosyal">Sosyal</button>
+      <button class="nav-btn filter-btn" data-category="tasarim">Tasarım</button>
+      <button class="nav-btn filter-btn" data-category="dini">Dini</button>
+      <button class="nav-btn filter-btn" data-category="egitim">Eğitim</button>
+      <button class="nav-btn filter-btn" data-category="saglik">Sağlık</button>
+      <button class="nav-btn" id="aboutBtn">Hakkımda</button>
+    </nav>
   </div>
 </header>
 
-<main class="container" role="main">
-
-  <section aria-labelledby="personal-info-title">
-    <h2 id="personal-info-title">Kişisel Bilgiler</h2>
-    <ul class="info-list">
-      <li><strong>Doğum Tarihi:</strong> 21 Mayıs 1997 (Resmi: 01.03.1999)</li>
-      <li><strong>Konum:</strong> Diyarbakır / Bağlar</li>
-      <li><strong>İlgi Alanı:</strong> Yapay Zeka</li>
-    </ul>
-  </section>
-
-  <section aria-labelledby="education-title">
-    <h2 id="education-title">Eğitim Bilgileri</h2>
-    <ul class="info-list">
-      <li><strong>İlkokul:</strong> Hüseyin Uluğ İlkokulu</li>
-      <li><strong>Lise:</strong> Tesisat Teknolojisi ve İklimlendirme - Soğutma Sistemleri (2017)</li>
-      <li><strong>Üniversite:</strong> Dicle Üniversitesi - Muhasebe ve Vergi Uygulamaları (2020)</li>
-    </ul>
-  </section>
-
-  <section aria-labelledby="goals-title">
-    <h2 id="goals-title">Hedeflerim</h2>
-    <div class="goals">
-      <div class="goal"><span>🍞</span> Tost Dükkanı Açmak</div>
-      <div class="goal"><span>📱</span> Instagram & TikTok Benzeri Sosyal Medya Uygulaması</div>
-      <div class="goal"><span>🎤</span> Diyarbakır'da Karaoke Mekanları</div>
-      <div class="goal"><span>🎬</span> Global Yayın Yapan YouTube Kanalı</div>
+<!-- Main Content -->
+<main class="main-content">
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="stat-item">
+      <span class="stat-number">36</span>
+      <span class="stat-label">Toplam Proje</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">9</span>
+      <span class="stat-label">Kategori</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">1000+</span>
+      <span class="stat-label">Toplam Ziyaret</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Sosyal Platform</span>
     </div>
   </section>
 
-  <section aria-labelledby="projects-title">
-    <h2 id="projects-title">Projelerim</h2>
-    <div class="projects-grid">
+  <!-- Projects Container -->
+  <div class="projects-container" id="projectsContainer">
 
-      <!-- Proje Kartları -->
-      <article class="project-card">
-        <a href="https://hakanaytas.github.io/AdisyonBeta/" target="_blank" rel="noopener" aria-label="Adisyon Programı">
-          <div class="project-image">
-            <img src="https://via.placeholder.com/400x160?text=Adisyon+Programı" alt="Adisyon Programı" />
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Adisyon Programı</h3>
-            <p class="project-desc">Restoranlar için adisyon takibi uygulaması.</p>
-            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </a>
-      </article>
+    <!-- Yeni Eklenen Proje -->
+    <a href="https://hakanaytas.github.io/tarihge-g-re-ya-hesaplama-listesi/" target="_blank" class="project-card" data-category="hesaplama">
+      <div class="project-image">📅</div>
+      <div class="project-content">
+        <div class="project-category">Hesaplama</div>
+        <h3 class="project-title">Tarihe Göre Yaş Hesaplama Listesi</h3>
+        <p class="project-description">Doğum tarihine göre yaş hesaplama aracı</p>
+        <div class="project-tags">
+          <span class="project-tag">Yaş Hesaplama</span>
+          <span class="project-tag">Tarih</span>
+        </div>
+      </div>
+    </a>
 
-      <article class="project-card">
-        <a href="https://hakanaytas.github.io/avans-hesaplama/" target="_blank" rel="noopener" aria-label="Nakit Avans Hesaplama">
-          <div class="project-image">
-            <img src="https://via.placeholder.com/400x160?text=Nakit+Avans+Hesaplama" alt="Nakit Avans Hesaplama" />
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Nakit Avans Hesaplama</h3>
-            <p class="project-desc">Nakit avans hesaplama aracı.</p>
-            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </a>
-      </article>
+    <!-- Hologram Card -->
+    <a href="https://hakanaytas.github.io/hologram-card/" target="_blank" class="project-card" data-category="tasarim">
+      <div class="project-image">🎨</div>
+      <div class="project-content">
+        <div class="project-category">Tasarım</div>
+        <h3 class="project-title">Hologram Card</h3>
+        <p class="project-description">3D hologram kartları oluşturun</p>
+        <div class="project-tags">
+          <span class="project-tag">3D</span>
+          <span class="project-tag">Hologram</span>
+        </div>
+      </div>
+    </a>
 
-      <article class="project-card">
-        <a href="https://hakanaytas.github.io/whatsaap-analiz-pro/" target="_blank" rel="noopener" aria-label="WhatsApp Kelime Analizi">
-          <div class="project-image">
-            <img src="https://via.placeholder.com/400x160?text=WhatsApp+Kelime+Analizi" alt="WhatsApp Kelime Analizi" />
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">WhatsApp Kelime Analizi</h3>
-            <p class="project-desc">WhatsApp sohbet kelime analiz aracı.</p>
-            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </a>
-      </article>
+    <!-- Logo Maker -->
+    <a href="https://hakanaytas.github.io/logo/" target="_blank" class="project-card" data-category="tasarim">
+      <div class="project-image">🖼️</div>
+      <div class="project-content">
+        <div class="project-category">Tasarım</div>
+        <h3 class="project-title">Logo Maker</h3>
+        <p class="project-description">Profesyonel logolar tasarlayın</p>
+        <div class="project-tags">
+          <span class="project-tag">Logo</span>
+          <span class="project-tag">Design</span>
+        </div>
+      </div>
+    </a>
 
-      <article class="project-card">
-        <a href="https://hakanaytas.github.io/bakkal-al-sat/" target="_blank" rel="noopener" aria-label="Al Sat Uygulaması">
-          <div class="project-image">
-            <img src="https://via.placeholder.com/400x160?text=Al+Sat+Uygulaması" alt="Al Sat Uygulaması" />
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Al Sat Uygulaması</h3>
-            <p class="project-desc">Bakkal için al-sat uygulaması.</p>
-            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </a>
-      </article>
+    <!-- Muhasebe Pro Max -->
+    <a href="https://hakanaytas.github.io/muhasebe-pro-max/" target="_blank" class="project-card" data-category="is">
+      <div class="project-image">💼</div>
+      <div class="project-content">
+        <div class="project-category">İş Araçları</div>
+        <h3 class="project-title">Muhasebe Pro Max</h3>
+        <p class="project-description">Gelişmiş muhasebe yönetim sistemi</p>
+        <div class="project-tags">
+          <span class="project-tag">Muhasebe</span>
+          <span class="project-tag">Finans</span>
+        </div>
+      </div>
+    </a>
 
-      <article class="project-card">
-        <a href="https://hakanaytas.github.io/sosyalmedyas-tes-/" target="_blank" rel="noopener" aria-label="Sosyal Medya Uygulaması Linç">
-          <div class="project-image">
-            <img src="https://via.placeholder.com/400x160?text=Sosyal+Medya+Uygulaması" alt="Sosyal Medya Uygulaması Linç" />
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Sosyal Medya Uygulaması "Linç"</h3>
-            <p class="project-desc">Sosyal medya platformu denemesi.</p>
-            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </a>
-      </article>
+    <!-- Clock Pro -->
+    <a href="https://hakanaytas.github.io/clock-pro/" target="_blank" class="project-card" data-category="is">
+      <div class="project-image">⏰</div>
+      <div class="project-content">
+        <div class="project-category">İş Araçları</div>
+        <h3 class="project-title">Clock Pro</h3>
+        <p class="project-description">Profesyonel saat ve zamanlayıcı</p>
+        <div class="project-tags">
+          <span class="project-tag">Saat</span>
+          <span class="project-tag">Timer</span>
+        </div>
+      </div>
+    </a>
 
-      <article class="project-card">
-        <a href="https://hakanaytas.github.io/damat-rkiyee/" target="_blank" rel="noopener" aria-label="Dama Oyunu">
-          <div class="project-image">
-            <img src="https://via.placeholder.com/400x160?text=Dama+Oyunu" alt="Dama Oyunu" />
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Dama Oyunu</h3>
-            <p class="project-desc">Klasik dama oyunu.</p>
-            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </a>
-      </article>
+    <!-- Satranç Öğrenme Oyunu -->
+    <a href="https://hakanaytas.github.io/santra-renme-oyunu/" target="_blank" class="project-card" data-category="oyun">
+      <div class="project-image">🎲</div>
+      <div class="project-content">
+        <div class="project-category">Oyun</div>
+        <h3 class="project-title">Satranç Öğrenme Oyunu</h3>
+        <p class="project-description">Satranç öğrenmek için eğitici oyun</p>
+        <div class="project-tags">
+          <span class="project-tag">Satranç</span>
+          <span class="project-tag">Eğitim</span>
+        </div>
+      </div>
+    </a>
 
-      <article class="project-card">
-        <a href="https://hakanaytas.github.io/zikirmatik/" target="_blank" rel="noopener" aria-label="Zikirmatik">
-          <div class="project-image">
-            <img src="https://via.placeholder.com/400x160?text=Zikirmatik" alt="Zikirmatik" />
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Zikirmatik</h3>
-            <p class="project-desc">Dijital zikirmatik uygulaması.</p>
-            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </a>
-      </article>
+    <!-- Kolaj Maker -->
+    <a href="https://hakanaytas.github.io/kolaj-maker/" target="_blank" class="project-card" data-category="tasarim">
+      <div class="project-image">🖌️</div>
+      <div class="project-content">
+        <div class="project-category">Tasarım</div>
+        <h3 class="project-title">Kolaj Maker</h3>
+        <p class="project-description">Fotoğraf kolajları oluşturun</p>
+        <div class="project-tags">
+          <span class="project-tag">Kolaj</span>
+          <span class="project-tag">Fotoğraf</span>
+        </div>
+      </div>
+    </a>
 
-      <article class="project-card">
-        <a href="https://hakanaytas.github.io/manifesto/" target="_blank" rel="noopener" aria-label="Manifesto">
-          <div class="project-image">
-            <img src="https://via.placeholder.com/400x160?text=Manifesto" alt="Manifesto" />
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Yapacaklarım ve Olacak Listem</h3>
-            <p class="project-desc">Kişisel manifesto ve planlar.</p>
-            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </a>
-      </article>
+    <!-- Cartel Anatolia TR -->
+    <a href="https://github.com/hakanaytas/CARTEL-ANATOLIA-TR" target="_blank" class="project-card" data-category="oyun">
+      <div class="project-image">🎮</div>
+      <div class="project-content">
+        <div class="project-category">Oyun</div>
+        <h3 class="project-title">Cartel Anatolia TR</h3>
+        <p class="project-description">Türkiye temalı aksiyon oyunu</p>
+        <div class="project-tags">
+          <span class="project-tag">Aksiyon</span>
+          <span class="project-tag">Türkiye</span>
+        </div>
+      </div>
+    </a>
 
-      <article class="project-card">
-        <a href="https://hakanaytas.github.io/YKS-Test/" target="_blank" rel="noopener" aria-label="YKS Test">
-          <div class="project-image">
-            <img src="https://via.placeholder.com/400x160?text=YKS+Test" alt="YKS Test" />
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">YKS Öğrencilerine Özel Soru Bankası</h3>
-            <p class="project-desc">YKS hazırlık soru bankası.</p>
-            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </a>
-      </article>
+    <!-- 41 Oyunu -->
+    <a href="https://hakanaytas.github.io/41/" target="_blank" class="project-card" data-category="oyun">
+      <div class="project-image">🃏</div>
+      <div class="project-content">
+        <div class="project-category">Oyun</div>
+        <h3 class="project-title">41 Oyunu</h3>
+        <p class="project-description">Geleneksel Türk kart oyunu</p>
+        <div class="project-tags">
+          <span class="project-tag">Kart</span>
+          <span class="project-tag">Geleneksel</span>
+        </div>
+      </div>
+    </a>
 
-      <article class="project-card">
-        <a href="https://hakanaytas.github.io/tostopia-adioo/" target="_blank" rel="noopener" aria-label="Tost Dükkanı Adisyon Programı">
-          <div class="project-image">
-            <img src="https://via.placeholder.com/400x160?text=Tost+Dükkanı+Adisyon" alt="Tost Dükkanı Adisyon" />
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Tost Dükkanı Adisyon Programı</h3>
-            <p class="project-desc">Tost dükkanı için adisyon programı.</p>
-            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </a>
-      </article>
+    <!-- Fitness Programı -->
+    <a href="https://hakanaytas.github.io/fitnes-prog/" target="_blank" class="project-card" data-category="saglik">
+      <div class="project-image">💪</div>
+      <div class="project-content">
+        <div class="project-category">Sağlık</div>
+        <h3 class="project-title">Fitness Programı</h3>
+        <p class="project-description">Kişiselleştirilebilir fitness planları</p>
+        <div class="project-tags">
+          <span class="project-tag">Fitness</span>
+          <span class="project-tag">Egzersiz</span>
+        </div>
+      </div>
+    </a>
 
-      <article class="project-card">
-        <a href="https://hakanaytas.github.io/-kran-hakan-d-m-davetiyesi/" target="_blank" rel="noopener" aria-label="Düğün Davetiyesi">
-          <div class="project-image">
-            <img src="https://via.placeholder.com/400x160?text=Düğün+Davetiyesi" alt="Düğün Davetiyesi" />
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Düğün Davetiyesi</h3>
-            <p class="project-desc">Kişisel düğün davetiyesi sitesi.</p>
-            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </a>
-      </article>
+    <!-- YouTube Kazanç -->
+    <a href="https://hakanaytas.github.io/YouTube-izlenme-ba-na-kazan-hesaplama/" target="_blank" class="project-card" data-category="hesaplama">
+      <div class="project-image">📊</div>
+      <div class="project-content">
+        <div class="project-category">Hesaplama</div>
+        <h3 class="project-title">YouTube Kazanç</h3>
+        <p class="project-description">YouTube gelir hesaplama aracı</p>
+        <div class="project-tags">
+          <span class="project-tag">YouTube</span>
+          <span class="project-tag">Gelir</span>
+        </div>
+      </div>
+    </a>
 
-      <article class="project-card">
-        <a href="https://hakanaytas.github.io/suat-ayta--vafat-sayac-/" target="_blank" rel="noopener" aria-label="Vefat Sayacı">
-          <div class="project-image">
-            <img src="https://via.placeholder.com/400x160?text=Vefat+Sayacı" alt="Vefat Sayacı" />
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Babamın Vefat Sayacı</h3>
-            <p class="project-desc">Anma ve sayım uygulaması.</p>
-            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </a>
-      </article>
+    <!-- Cinayet Oyunu -->
+    <a href="https://hakanaytas.github.io/c-nayet-oyunu/" target="_blank" class="project-card" data-category="oyun">
+      <div class="project-image">🔍</div>
+      <div class="project-content">
+        <div class="project-category">Oyun</div>
+        <h3 class="project-title">Cinayet Oyunu</h3>
+        <p class="project-description">Dedektiflik ve gizem oyunu</p>
+        <div class="project-tags">
+          <span class="project-tag">Gizem</span>
+          <span class="project-tag">Dedektif</span>
+        </div>
+      </div>
+    </a>
 
-      <article class="project-card">
-        <a href="https://hakanaytas.github.io/cafeadisyonadio.git.io/" target="_blank" rel="noopener" aria-label="Cafe Adisyon Programı">
-          <div class="project-image">
-            <img src="https://via.placeholder.com/400x160?text=Cafe+Adisyon+Programı" alt="Cafe Adisyon Programı" />
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Cafe Adisyon Programı</h3>
-            <p class="project-desc">Kafeler için adisyon takibi uygulaması.</p>
-            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </a>
-      </article>
+    <!-- Manifesto (Yeni) -->
+    <a href="https://hakanaytas.github.io/manifestooo/" target="_blank" class="project-card" data-category="sosyal">
+      <div class="project-image">📜</div>
+      <div class="project-content">
+        <div class="project-category">Sosyal</div>
+        <h3 class="project-title">Manifesto (Yeni)</h3>
+        <p class="project-description">Güncellenmiş manifesto ve düşünce platformu</p>
+        <div class="project-tags">
+          <span class="project-tag">Manifesto</span>
+          <span class="project-tag">Düşünce</span>
+        </div>
+      </div>
+    </a>
 
-      <article class="project-card">
-        <a href="https://hakanaytas.github.io/2026s-navsayac-/" target="_blank" rel="noopener" aria-label="2026 Sınav Sayaçları">
-          <div class="project-image">
-            <img src="https://via.placeholder.com/400x160?text=2026+Sınav+Sayaçları" alt="2026 Sınav Sayaçları" />
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">2026 Sınav Sayaçları</h3>
-            <p class="project-desc">Türkiye'deki 2026 sınavları için geri sayım.</p>
-            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </a>
-      </article>
+    <!-- Kurtlar Vadisi Quiz -->
+    <a href="https://hakanaytas.github.io/kurtlar-vadisi-quiz-oyunu/" target="_blank" class="project-card" data-category="oyun">
+      <div class="project-image">🐺</div>
+      <div class="project-content">
+        <div class="project-category">Oyun</div>
+        <h3 class="project-title">Kurtlar Vadisi Quiz</h3>
+        <p class="project-description">Kurtlar Vadisi bilgi yarışması</p>
+        <div class="project-tags">
+          <span class="project-tag">Quiz</span>
+          <span class="project-tag">Dizi</span>
+        </div>
+      </div>
+    </a>
 
-      <article class="project-card">
-        <a href="https://hakanaytas.github.io/plaketolusturucu/" target="_blank" rel="noopener" aria-label="Plaket Oluşturucu">
-          <div class="project-image">
-            <img src="https://via.placeholder.com/400x160?text=Plaket+Oluşturucu" alt="Plaket Oluşturucu" />
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Plaket Oluşturucu</h3>
-            <p class="project-desc">Özelleştirilebilir plaket tasarlama aracı.</p>
-            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </a>
-      </article>
+    <!-- Sevgili Sayacı Pro -->
+    <a href="https://hakanaytas.github.io/sevgili-sayac-pro/" target="_blank" class="project-card" data-category="sosyal">
+      <div class="project-image">❤️</div>
+      <div class="project-content">
+        <div class="project-category">Sosyal</div>
+        <h3 class="project-title">Sevgili Sayacı Pro</h3>
+        <p class="project-description">İlişki günü takip uygulaması</p>
+        <div class="project-tags">
+          <span class="project-tag">İlişki</span>
+          <span class="project-tag">Tarih</span>
+        </div>
+      </div>
+    </a>
 
-      <article class="project-card">
-        <a href="https://hakanaytas.github.io/Hesaplama-Ara-lar-/" target="_blank" rel="noopener" aria-label="Hesaplama Araçları">
-          <div class="project-image">
-            <img src="https://via.placeholder.com/400x160?text=Hesaplama+Araçları" alt="Hesaplama Araçları" />
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Hesaplama Araçları</h3>
-            <p class="project-desc">Çeşitli hesaplamalar için pratik araçlar.</p>
-            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </a>
-      </article>
+    <!-- Adisyon Sistemi -->
+    <a href="https://hakanaytas.github.io/orjinal-adisyon-sistemi/" target="_blank" class="project-card" data-category="is">
+      <div class="project-image">🧾</div>
+      <div class="project-content">
+        <div class="project-category">İş Araçları</div>
+        <h3 class="project-title">Adisyon Sistemi</h3>
+        <p class="project-description">Restoran ve kafe adisyon yönetimi</p>
+        <div class="project-tags">
+          <span class="project-tag">Restoran</span>
+          <span class="project-tag">Fatura</span>
+        </div>
+      </div>
+    </a>
 
-      <article class="project-card">
-        <a href="https://hakanaytas.github.io/Allah-a-dua/" target="_blank" rel="noopener" aria-label="Dua Kabul Zikri">
-          <div class="project-image">
-            <img src="https://via.placeholder.com/400x160?text=Dua+Kabul+Zikri" alt="Dua Kabul Zikri" />
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Dua Kabul Zikri</h3>
-            <p class="project-desc">Dua ve zikir uygulaması.</p>
-            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </a>
-      </article>
+    <!-- Plan Seçici -->
+    <a href="https://hakanaytas.github.io/plan-secici/" target="_blank" class="project-card" data-category="is">
+      <div class="project-image">📋</div>
+      <div class="project-content">
+        <div class="project-category">İş Araçları</div>
+        <h3 class="project-title">Plan Seçici</h3>
+        <p class="project-description">İş planı ve proje seçim aracı</p>
+        <div class="project-tags">
+          <span class="project-tag">Planlama</span>
+          <span class="project-tag">Proje</span>
+        </div>
+      </div>
+    </a>
 
-      <article class="project-card">
-        <a href="https://hakanaytas.github.io/sevg-l-qu-z/" target="_blank" rel="noopener" aria-label="Sevgili ile İlgili Quiz">
-          <div class="project-image">
-            <img src="https://via.placeholder.com/400x160?text=Sevgili+Quiz" alt="Sevgili ile İlgili Quiz" />
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Sevgili ile İlgili Quiz</h3>
-            <p class="project-desc">İlişki temalı eğlenceli quiz.</p>
-            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </a>
-      </article>
+    <!-- Kira Takibi -->
+    <a href="https://hakanaytas.github.io/kira-takibi-ve-daha-fazlas-/" target="_blank" class="project-card" data-category="is">
+      <div class="project-image">🏠</div>
+      <div class="project-content">
+        <div class="project-category">İş Araçları</div>
+        <h3 class="project-title">Kira Takibi</h3>
+        <p class="project-description">Emlak kira yönetim sistemi</p>
+        <div class="project-tags">
+          <span class="project-tag">Emlak</span>
+          <span class="project-tag">Kira</span>
+        </div>
+      </div>
+    </a>
 
-      <article class="project-card">
-        <a href="https://hakanaytas.github.io/saat/" target="_blank" rel="noopener" aria-label="Masaüstü Dijital Saat">
-          <div class="project-image">
-            <img src="https://via.placeholder.com/400x160?text=Dijital+Saat" alt="Masaüstü Dijital Saat" />
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Masaüstü Dijital Saat</h3>
-            <p class="project-desc">Basit ve şık dijital saat uygulaması.</p>
-            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </a>
-      </article>
+    <!-- Nakit Avans Hesaplama -->
+    <a href="https://hakanaytas.github.io/avans-hesaplama/" target="_blank" class="project-card" data-category="hesaplama">
+      <div class="project-image">💰</div>
+      <div class="project-content">
+        <div class="project-category">Hesaplama</div>
+        <h3 class="project-title">Nakit Avans Hesaplama</h3>
+        <p class="project-description">Kredi kartı avans hesaplayıcısı</p>
+        <div class="project-tags">
+          <span class="project-tag">Avans</span>
+          <span class="project-tag">Finans</span>
+        </div>
+      </div>
+    </a>
 
-      <article class="project-card">
-        <a href="https://hakanaytas.github.io/seviyor-sevmiyor/" target="_blank" rel="noopener" aria-label="Seviyor Sevmiyor Oyunu">
-          <div class="project-image">
-            <img src="https://via.placeholder.com/400x160?text=Seviyor+Sevmiyor" alt="Seviyor Sevmiyor Oyunu" />
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Seviyor Sevmiyor Oyunu</h3>
-            <p class="project-desc">Klasik seviyor-sevmiyor falı oyunu.</p>
-            <span class="project-link">Siteye Git <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </a>
-      </article>
+    <!-- WhatsApp Analizi -->
+    <a href="https://hakanaytas.github.io/whatsaap-analiz-pro/" target="_blank" class="project-card" data-category="sosyal">
+      <div class="project-image">💬</div>
+      <div class="project-content">
+        <div class="project-category">Sosyal</div>
+        <h3 class="project-title">WhatsApp Analizi</h3>
+        <p class="project-description">WhatsApp sohbet analiz aracı</p>
+        <div class="project-tags">
+          <span class="project-tag">WhatsApp</span>
+          <span class="project-tag">Analiz</span>
+        </div>
+      </div>
+    </a>
 
+    <!-- Bakkal Al Sat -->
+    <a href="https://hakanaytas.github.io/bakkal-al-sat/" target="_blank" class="project-card" data-category="is">
+      <div class="project-image">🏪</div>
+      <div class="project-content">
+        <div class="project-category">İş Araçları</div>
+        <h3 class="project-title">Bakkal Al Sat</h3>
+        <p class="project-description">Bakkal işletme yönetim sistemi</p>
+        <div class="project-tags">
+          <span class="project-tag">Bakkal</span>
+          <span class="project-tag">Satış</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Sosyal Medya Linç -->
+    <a href="https://hakanaytas.github.io/sosyalmedyas-tes-/" target="_blank" class="project-card" data-category="sosyal">
+      <div class="project-image">🔗</div>
+      <div class="project-content">
+        <div class="project-category">Sosyal</div>
+        <h3 class="project-title">Sosyal Medya "Linç"</h3>
+        <p class="project-description">Sosyal medya bağlantı yönetimi</p>
+        <div class="project-tags">
+          <span class="project-tag">Sosyal</span>
+          <span class="project-tag">Link</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Dama Oyunu -->
+    <a href="https://hakanaytas.github.io/damat-rkiyee/" target="_blank" class="project-card" data-category="oyun">
+      <div class="project-image">♟️</div>
+      <div class="project-content">
+        <div class="project-category">Oyun</div>
+        <h3 class="project-title">Dama Oyunu</h3>
+        <p class="project-description">Klasik dama oyunu</p>
+        <div class="project-tags">
+          <span class="project-tag">Dama</span>
+          <span class="project-tag">Strateji</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Zikirmatik -->
+    <a href="https://hakanaytas.github.io/zikirmatik/" target="_blank" class="project-card" data-category="dini">
+      <div class="project-image">📿</div>
+      <div class="project-content">
+        <div class="project-category">Dini</div>
+        <h3 class="project-title">Zikirmatik</h3>
+        <p class="project-description">Dijital zikir sayma aracı</p>
+        <div class="project-tags">
+          <span class="project-tag">Zikir</span>
+          <span class="project-tag">İbadet</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Manifesto -->
+    <a href="https://hakanaytas.github.io/manifesto/" target="_blank" class="project-card" data-category="sosyal">
+      <div class="project-image">📖</div>
+      <div class="project-content">
+        <div class="project-category">Sosyal</div>
+        <h3 class="project-title">Manifesto</h3>
+        <p class="project-description">Kişisel manifesto ve düşünce platformu</p>
+        <div class="project-tags">
+          <span class="project-tag">Manifesto</span>
+          <span class="project-tag">Düşünce</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- YKS Test -->
+    <a href="https://hakanaytas.github.io/YKS-Test/" target="_blank" class="project-card" data-category="egitim">
+      <div class="project-image">📚</div>
+      <div class="project-content">
+        <div class="project-category">Eğitim</div>
+        <h3 class="project-title">YKS Test</h3>
+        <p class="project-description">Üniversite sınavı test sistemi</p>
+        <div class="project-tags">
+          <span class="project-tag">YKS</span>
+          <span class="project-tag">Test</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Tostopia Adisyon -->
+    <a href="https://hakanaytas.github.io/tostopia-adioo/" target="_blank" class="project-card" data-category="is">
+      <div class="project-image">🍞</div>
+      <div class="project-content">
+        <div class="project-category">İş Araçları</div>
+        <h3 class="project-title">Tostopia Adisyon</h3>
+        <p class="project-description">Tostopia için özel adisyon sistemi</p>
+        <div class="project-tags">
+          <span class="project-tag">Tostopia</span>
+          <span class="project-tag">Adisyon</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Düğün Davetiyesi -->
+    <a href="https://hakanaytas.github.io/-kran-hakan-d-m-davetiyesi/" target="_blank" class="project-card" data-category="sosyal">
+      <div class="project-image">👑</div>
+      <div class="project-content">
+        <div class="project-category">Sosyal</div>
+        <h3 class="project-title">Düğün Davetiyesi</h3>
+        <p class="project-description">Dijital düğün davetiye sistemi</p>
+        <div class="project-tags">
+          <span class="project-tag">Düğün</span>
+          <span class="project-tag">Davetiye</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Vefat Sayacı -->
+    <a href="https://hakanaytas.github.io/suat-ayta--vafat-sayac-/" target="_blank" class="project-card" data-category="sosyal">
+      <div class="project-image">🕊️</div>
+      <div class="project-content">
+        <div class="project-category">Sosyal</div>
+        <h3 class="project-title">Vefat Sayacı</h3>
+        <p class="project-description">Vefat tarihinden itibaren geçen süre</p>
+        <div class="project-tags">
+          <span class="project-tag">Anma</span>
+          <span class="project-tag">Tarih</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- 2026 Sınav Sayacı -->
+    <a href="https://hakanaytas.github.io/2026s-navsayac-/" target="_blank" class="project-card" data-category="egitim">
+      <div class="project-image">🎓</div>
+      <div class="project-content">
+        <div class="project-category">Eğitim</div>
+        <h3 class="project-title">2026 Sınav Sayacı</h3>
+        <p class="project-description">2026 sınavlarına geri sayım</p>
+        <div class="project-tags">
+          <span class="project-tag">Sınav</span>
+          <span class="project-tag">Geri Sayım</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Plaket Oluşturucu -->
+    <a href="https://hakanaytas.github.io/plaketolusturucu/" target="_blank" class="project-card" data-category="tasarim">
+      <div class="project-image">🏆</div>
+      <div class="project-content">
+        <div class="project-category">Tasarım</div>
+        <h3 class="project-title">Plaket Oluşturucu</h3>
+        <p class="project-description">Özel plaket ve sertifika tasarlayın</p>
+        <div class="project-tags">
+          <span class="project-tag">Plaket</span>
+          <span class="project-tag">Tasarım</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Hesaplama Araçları -->
+    <a href="https://hakanaytas.github.io/Hesaplama-Ara-lar-/" target="_blank" class="project-card" data-category="hesaplama">
+      <div class="project-image">🔢</div>
+      <div class="project-content">
+        <div class="project-category">Hesaplama</div>
+        <h3 class="project-title">Hesaplama Araçları</h3>
+        <p class="project-description">Çok amaçlı hesaplama koleksiyonu</p>
+        <div class="project-tags">
+          <span class="project-tag">Hesaplama</span>
+          <span class="project-tag">Araçlar</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Dua Kabul Zikri -->
+    <a href="https://hakanaytas.github.io/Allah-a-dua/" target="_blank" class="project-card" data-category="dini">
+      <div class="project-image">🤲</div>
+      <div class="project-content">
+        <div class="project-category">Dini</div>
+        <h3 class="project-title">Dua Kabul Zikri</h3>
+        <p class="project-description">Dua ve zikir rehberi</p>
+        <div class="project-tags">
+          <span class="project-tag">Dua</span>
+          <span class="project-tag">Zikir</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Sevgili Quiz -->
+    <a href="https://hakanaytas.github.io/sevg-l-qu-z/" target="_blank" class="project-card" data-category="sosyal">
+      <div class="project-image">💕</div>
+      <div class="project-content">
+        <div class="project-category">Sosyal</div>
+        <h3 class="project-title">Sevgili Quiz</h3>
+        <p class="project-description">Sevgili uyumluluk testi</p>
+        <div class="project-tags">
+          <span class="project-tag">Quiz</span>
+          <span class="project-tag">İlişki</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Masaüstü Dijital Saat -->
+    <a href="https://hakanaytas.github.io/saat/" target="_blank" class="project-card" data-category="is">
+      <div class="project-image">🕐</div>
+      <div class="project-content">
+        <div class="project-category">İş Araçları</div>
+        <h3 class="project-title">Masaüstü Dijital Saat</h3>
+        <p class="project-description">Tam ekran dijital saat görüntüsü</p>
+        <div class="project-tags">
+          <span class="project-tag">Saat</span>
+          <span class="project-tag">Masaüstü</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Seviyor Sevmiyor -->
+    <a href="https://hakanaytas.github.io/seviyor-sevmiyor/" target="_blank" class="project-card" data-category="sosyal">
+      <div class="project-image">🌼</div>
+      <div class="project-content">
+        <div class="project-category">Sosyal</div>
+        <h3 class="project-title">Seviyor Sevmiyor</h3>
+        <p class="project-description">Klasik papatya falı oyunu</p>
+        <div class="project-tags">
+          <span class="project-tag">Fal</span>
+          <span class="project-tag">Oyun</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Pattern Lock Breaker -->
+    <a href="https://hakanaytas.github.io/Pattern-Lock-Breaker---Desen-Kilit-K-rma/" target="_blank" class="project-card" data-category="is">
+      <div class="project-image">🔓</div>
+      <div class="project-content">
+        <div class="project-category">İş Araçları</div>
+        <h3 class="project-title">Pattern Lock Breaker</h3>
+        <p class="project-description">Desen kilit kırma simülatörü</p>
+        <div class="project-tags">
+          <span class="project-tag">Güvenlik</span>
+          <span class="project-tag">Desen</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- Social Section -->
+  <section class="social-section">
+    <h2 class="social-title">Sosyal Medya</h2>
+    <div class="social-links">
+      <a href="https://www.instagram.com/hakan21aytas/" target="_blank" class="social-link" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.youtube.com/@hakan21aytas" target="_blank" class="social-link" aria-label="YouTube">
+        <i class="fab fa-youtube"></i>
+      </a>
+      <a href="https://www.facebook.com/profile.php?id=61557517211030" target="_blank" class="social-link" aria-label="Facebook">
+        <i class="fab fa-facebook"></i>
+      </a>
+      <a href="https://github.com/hakanaytas" target="_blank" class="social-link" aria-label="GitHub">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/hakanaytas/" target="_blank" class="social-link" aria-label="LinkedIn">
+        <i class="fab fa-linkedin"></i>
+      </a>
     </div>
   </section>
 
 </main>
+
+<!-- About Modal -->
+<div id="aboutModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeBtn">&times;</span>
+    <h2 class="modal-title">Hakkımda</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>Kişisel Bilgiler</h3>
+        <ul class="info-list">
+          <li><strong>Doğum Tarihi:</strong> <span>21 Mayıs 1997</span></li>
+          <li><strong>Konum:</strong> <span>Diyarbakır / Bağlar</span></li>
+          <li><strong>İlgi Alanı:</strong> <span>Yapay Zeka, Yazılım</span></li>
+          <li><strong>Deneyim:</strong> <span>5+ Yıl</span></li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Eğitim Bilgileri</h3>
+        <ul class="info-list">
+          <li><strong>İlkokul:</strong> <span>Hüseyin Uluğ İlkokulu</span></li>
+          <li><strong>Lise:</strong> <span>Tesisat Teknolojisi (2017)</span></li>
+          <li><strong>Üniversite:</strong> <span>Dicle Üni. - Muhasebe (2020)</span></li>
+          <li><strong>Sertifika:</strong> <span>Web Development</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scroll to Top -->
+<button class="scroll-to-top" id="scrollToTop">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
+<script>
+// Loading Animation
+window.addEventListener('load', () => {
+  const loading = document.getElementById('loading');
+  setTimeout(() => {
+    loading.classList.add('hidden');
+  }, 1000);
+});
+
+// Mobile Navigation Toggle
+const navToggle = document.getElementById('navToggle');
+const navMenu = document.getElementById('navMenu');
+
+navToggle.addEventListener('click', () => {
+  navMenu.classList.toggle('active');
+  const icon = navToggle.querySelector('i');
+  icon.classList.toggle('fa-bars');
+  icon.classList.toggle('fa-times');
+});
+
+// Category Filter
+const filterButtons = document.querySelectorAll('.filter-btn');
+const projectCards = document.querySelectorAll('.project-card');
+
+filterButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    // Remove active class from all buttons
+    filterButtons.forEach(btn => btn.classList.remove('active'));
+    // Add active class to clicked button
+    button.classList.add('active');
+    
+    const category = button.dataset.category;
+    
+    // Filter projects
+    projectCards.forEach(card => {
+      if (category === 'all' || card.dataset.category === category) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+    
+    // Close mobile menu
+    navMenu.classList.remove('active');
+    navToggle.querySelector('i').classList.add('fa-bars');
+    navToggle.querySelector('i').classList.remove('fa-times');
+  });
+});
+
+// Search Functionality
+const searchInput = document.getElementById('searchInput');
+
+searchInput.addEventListener('input', (e) => {
+  const searchTerm = e.target.value.toLowerCase().trim();
+  
+  projectCards.forEach(card => {
+    const title = card.querySelector('.project-title').textContent.toLowerCase();
+    const category = card.querySelector('.project-category').textContent.toLowerCase();
+    const description = card.querySelector('.project-description').textContent.toLowerCase();
+    const tags = Array.from(card.querySelectorAll('.project-tag')).map(tag => tag.textContent.toLowerCase());
+    
+    const matches = title.includes(searchTerm) || 
+                   category.includes(searchTerm) || 
+                   description.includes(searchTerm) ||
+                   tags.some(tag => tag.includes(searchTerm));
+    
+    if (matches) {
+      card.classList.remove('hidden');
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+});
+
+// About Modal
+const aboutBtn = document.getElementById('aboutBtn');
+const aboutModal = document.getElementById('aboutModal');
+const closeBtn = document.getElementById('closeBtn');
+
+aboutBtn.addEventListener('click', () => {
+  aboutModal.style.display = 'block';
+  navMenu.classList.remove('active');
+  navToggle.querySelector('i').classList.add('fa-bars');
+  navToggle.querySelector('i').classList.remove('fa-times');
+});
+
+closeBtn.addEventListener('click', () => {
+  aboutModal.style.display = 'none';
+});
+
+window.addEventListener('click', (e) => {
+  if (e.target === aboutModal) {
+    aboutModal.style.display = 'none';
+  }
+});
+
+// Scroll to Top
+const scrollToTop = document.getElementById('scrollToTop');
+
+window.addEventListener('scroll', () => {
+  if (window.pageYOffset > 300) {
+    scrollToTop.classList.add('visible');
+  } else {
+    scrollToTop.classList.remove('visible');
+  }
+});
+
+scrollToTop.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.header') && navMenu.classList.contains('active')) {
+    navMenu.classList.remove('active');
+    navToggle.querySelector('i').classList.add('fa-bars');
+    navToggle.querySelector('i').classList.remove('fa-times');
+  }
+});
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+  // Focus search on Ctrl+/
+  if (e.ctrlKey && e.key === '/') {
+    e.preventDefault();
+    searchInput.focus();
+  }
+  
+  // Close modal on Escape
+  if (e.key === 'Escape') {
+    aboutModal.style.display = 'none';
+  }
+});
+
+// Add click tracking for projects
+projectCards.forEach(card => {
+  card.addEventListener('click', () => {
+    const projectTitle = card.querySelector('.project-title').textContent;
+    console.log(`Project clicked: ${projectTitle}`);
+  });
+});
+</script>
 
 </body>
 </html>
