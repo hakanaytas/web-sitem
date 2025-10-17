@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linç Portfolio</title>
+    <title>Pandora Arama</title>
     <style>
         * {
             margin: 0;
@@ -12,1255 +12,930 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #FFD700;
-            min-height: 100vh;
-            color: #333;
-            padding-bottom: 80px; /* Alt menü için boşluk */
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+            font-family: arial, sans-serif;
+            background: #fff;
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
-        }
-
-        /* Header */
-        .header {
-            display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            padding: 20px 0;
+            flex-direction: column;
+            padding: 20px;
+            color: #3c4043;
         }
 
         .logo {
-            font-size: 32px;
-            font-weight: bold;
-            color: #333;
-            text-decoration: none;
+            margin-bottom: 35px;
+            text-align: center;
+            position: relative;
+            display: inline-block;
         }
 
-        /* Search Bar */
-        .search-container {
+        .country-info {
+            position: absolute;
+            right: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+            color: #5f6368;
+        }
+
+        .logo-container {
             display: flex;
             justify-content: center;
-            margin-bottom: 30px;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+
+        .logo-text {
+            font-size: 90px;
+            font-weight: normal;
+            margin: 0;
+        }
+
+        .logo-p { color: #4285f4; cursor: pointer; transition: all 0.3s ease; }
+        .logo-a1 { color: #ea4335; cursor: pointer; transition: all 0.3s ease; }
+        .logo-n { color: #fbbc04; cursor: pointer; transition: all 0.3s ease; }
+        .logo-d { color: #4285f4; cursor: pointer; transition: all 0.3s ease; }
+        .logo-o { color: #34a853; cursor: pointer; transition: all 0.3s ease; }
+        .logo-r { color: #ea4335; cursor: pointer; transition: all 0.3s ease; }
+        .logo-a2 { color: #4285f4; cursor: pointer; transition: all 0.3s ease; }
+        
+        .logo-text.color-blue .logo-p, .logo-text.color-blue .logo-a1, .logo-text.color-blue .logo-n, 
+        .logo-text.color-blue .logo-d, .logo-text.color-blue .logo-o, .logo-text.color-blue .logo-r, .logo-text.color-blue .logo-a2 { color: #4285f4; }
+        
+        .logo-text.color-red .logo-p, .logo-text.color-red .logo-a1, .logo-text.color-red .logo-n, 
+        .logo-text.color-red .logo-d, .logo-text.color-red .logo-o, .logo-text.color-red .logo-r, .logo-text.color-red .logo-a2 { color: #ea4335; }
+        
+        .logo-text.color-yellow .logo-p, .logo-text.color-yellow .logo-a1, .logo-text.color-yellow .logo-n, 
+        .logo-text.color-yellow .logo-d, .logo-text.color-yellow .logo-o, .logo-text.color-yellow .logo-r, .logo-text.color-yellow .logo-a2 { color: #fbbc04; }
+        
+        .logo-text.color-green .logo-p, .logo-text.color-green .logo-a1, .logo-text.color-green .logo-n, 
+        .logo-text.color-green .logo-d, .logo-text.color-green .logo-o, .logo-text.color-green .logo-r, .logo-text.color-green .logo-a2 { color: #34a853; }
+
+        .search-container {
+            max-width: 584px;
+            width: 100%;
+            position: relative;
+        }
+
+        .search-wrapper {
+            position: relative;
+            border: 1px solid #dfe1e5;
+            border-radius: 24px;
+            padding: 5px 8px 0 16px;
+            width: 100%;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            transition: box-shadow 200ms;
+            height: 44px;
+        }
+
+        .search-wrapper:hover {
+            box-shadow: 0 2px 5px 1px rgba(64,60,67,.16);
+            border-color: #dfe1e5;
+        }
+
+        .search-wrapper:focus-within {
+            box-shadow: 0 2px 5px 1px rgba(64,60,67,.16);
+            border-color: #dfe1e5;
         }
 
         .search-box {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 16px 50px 16px 20px;
-            font-size: 16px;
+            flex: 1;
             border: none;
-            border-radius: 50px;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             outline: none;
+            background: transparent;
+            font-size: 16px;
+            color: #202124;
+            padding: 0;
+            height: 34px;
         }
 
-        .search-input::placeholder {
-            color: #999;
+        .search-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 13px;
+            opacity: 0.3;
         }
 
-        .search-btn {
+        .suggestions {
             position: absolute;
-            right: 8px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: #FFD700;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border-radius: 0 0 24px 24px;
+            box-shadow: 0 2px 5px 1px rgba(64,60,67,.16);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-5px);
+            transition: all 0.2s ease;
+            border: 1px solid #dfe1e5;
+            border-top: none;
+        }
+
+        .suggestions.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .suggestion-item {
+            padding: 8px 20px;
             cursor: pointer;
+            transition: background-color 0.1s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+            color: #202124;
+            border-bottom: 1px solid #f1f3f4;
+        }
+
+        .suggestion-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+            border-radius: 0 0 24px 24px;
+        }
+
+        .suggestion-icon {
+            width: 20px;
+            height: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
-        }
-
-        /* Main Content Area */
-        .main-content {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            flex-grow: 1;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-
-        /* Page Content */
-        .page-content {
-            display: none;
-        }
-
-        .page-content.active {
-            display: block;
-        }
-
-        /* Section Title */
-        .section-title {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 25px;
-            color: #333;
-        }
-
-        /* Project Grid */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .project-card {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 20px;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .project-card:hover {
-            border-color: #FFD700;
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(255,215,0,0.3);
-        }
-
-        .project-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #333;
-        }
-
-        .project-description {
             font-size: 14px;
-            color: #666;
-            margin-bottom: 15px;
-            line-height: 1.4;
+            opacity: 0.6;
         }
 
-        .project-link {
-            display: inline-block;
-            background: #FFD700;
-            color: #333;
-            padding: 8px 16px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        .project-link:hover {
-            background: #333;
-            color: #FFD700;
-        }
-
-        /* Category Section */
-        .category-section {
-            margin-bottom: 40px;
-        }
-
-        .category-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #333;
-            border-left: 4px solid #FFD700;
-            padding-left: 15px;
-        }
-
-        /* Contact Info */
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .contact-card {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 25px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .contact-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(255,215,0,0.2);
-        }
-
-        .contact-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .contact-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .contact-detail {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-
-        /* Settings */
-        .settings-section {
-            margin-bottom: 40px;
-        }
-
-        .settings-group {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 20px;
-        }
-
-        .settings-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #333;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .settings-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .settings-item:last-child {
-            border-bottom: none;
-        }
-
-        .settings-label {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .settings-main-text {
-            font-weight: 500;
-            color: #333;
-        }
-
-        .settings-sub-text {
-            font-size: 12px;
-            color: #666;
-        }
-
-        /* Toggle Switch */
-        .toggle-switch {
-            width: 50px;
-            height: 26px;
-            background: #ccc;
-            border-radius: 13px;
-            position: relative;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .toggle-switch.active {
-            background: #FFD700;
-        }
-
-        .toggle-switch::after {
-            content: '';
-            width: 22px;
-            height: 22px;
-            background: white;
-            border-radius: 50%;
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            transition: transform 0.3s;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .toggle-switch.active::after {
-            transform: translateX(24px);
-        }
-
-        /* Select Dropdown */
-        .settings-select {
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background: white;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        /* Settings Button */
-        .settings-btn {
-            background: #FFD700;
-            color: #333;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .settings-btn:hover {
-            background: #333;
-            color: #FFD700;
-        }
-
-        .settings-btn.danger {
-            background: #ff4757;
-            color: white;
-        }
-
-        .settings-btn.danger:hover {
-            background: #ff3742;
-        }
-
-        /* Range Slider */
-        .range-slider {
-            width: 100px;
-            height: 6px;
-            border-radius: 3px;
-            background: #ddd;
-            outline: none;
-            -webkit-appearance: none;
-        }
-
-        .range-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #FFD700;
-            cursor: pointer;
-        }
-
-        .range-slider::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #FFD700;
-            cursor: pointer;
-            border: none;
-        }
-
-        /* Bottom Navigation - SABİT */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            display: flex;
-            padding: 15px 0;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
-            z-index: 1000;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-item {
+        .suggestion-text {
             flex: 1;
+        }
+
+        .no-results {
+            padding: 20px;
             text-align: center;
-            padding: 10px;
+            color: #5f6368;
+            font-size: 14px;
+        }
+
+        .buttons {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .btn {
+            background: #f8f9fa;
+            border: 1px solid #f8f9fa;
+            border-radius: 4px;
+            color: #3c4043;
+            font-size: 14px;
+            margin: 11px 4px;
+            padding: 0 20px;
+            height: 36px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            color: #666;
-            border-radius: 15px;
-            margin: 0 5px;
-        }
-
-        .nav-item.active {
-            background: #FFD700;
-            color: #333;
-        }
-
-        .nav-item:hover {
-            background: rgba(255,215,0,0.1);
-        }
-
-        .nav-icon {
-            font-size: 20px;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        .nav-label {
-            font-size: 12px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 15px;
-            }
-
-            .main-content {
-                padding: 20px;
-                margin-bottom: 10px;
-            }
-
-            .project-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .header {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
-
-            .search-container {
-                margin-bottom: 20px;
-            }
-
-            .contact-info {
-                grid-template-columns: 1fr;
-            }
-
-            .settings-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-
-            .settings-item > div:last-child {
-                align-self: flex-end;
-            }
-
-            .bottom-nav {
-                padding: 10px 0;
-            }
-
-            .nav-item {
-                margin: 0 2px;
-                padding: 8px;
-            }
-
-            .nav-icon {
-                font-size: 18px;
-                margin-bottom: 3px;
-            }
-
-            .nav-label {
-                font-size: 10px;
-            }
-        }
-
-        /* Dark Mode */
-        body.dark-mode {
-            background: #1a1a1a;
-        }
-
-        body.dark-mode .main-content {
-            background: #2d2d2d;
-            color: #fff;
-        }
-
-        body.dark-mode .project-card,
-        body.dark-mode .contact-card,
-        body.dark-mode .settings-group {
-            background: #3a3a3a;
-            color: #fff;
-        }
-
-        body.dark-mode .section-title,
-        body.dark-mode .settings-title {
-            color: #fff;
-        }
-
-        body.dark-mode .bottom-nav {
-            background: #2d2d2d;
-        }
-
-        body.dark-mode .search-input {
-            background: #3a3a3a;
-            color: #fff;
-        }
-
-        /* Loading Animation */
-        .loading {
+            transition: all 0.1s ease;
             display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,215,0,.3);
-            border-radius: 50%;
-            border-top-color: #FFD700;
-            animation: spin 1s ease-in-out infinite;
+            text-decoration: none;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .btn:hover {
+            box-shadow: 0 1px 1px rgba(0,0,0,.1);
+            background: #f1f3f4;
+            border: 1px solid #dadce0;
         }
 
-        /* Toast Notification */
-        .toast {
+        /* İsim ekleme paneli */
+        .admin-panel {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: #333;
-            color: white;
-            padding: 15px 20px;
+            background: #fff;
+            border: 1px solid #dadce0;
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            z-index: 10000;
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            min-width: 250px;
+            z-index: 2000;
         }
 
-        .toast.show {
-            transform: translateX(0);
+        .admin-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 20px;
+            z-index: 2001;
+            transition: all 0.2s ease;
         }
 
-        .toast.success {
-            background: #10b981;
+        .admin-toggle:hover {
+            background: #1a73e8;
+            transform: scale(1.1);
         }
 
-        .toast.error {
-            background: #ef4444;
+        .admin-panel input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .admin-panel button {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px 5px 5px 0;
+        }
+
+        .admin-panel button:hover {
+            background: #1557b0;
+        }
+
+        .admin-panel h4 {
+            margin-bottom: 10px;
+            color: #202124;
+            font-size: 16px;
+        }
+
+        .name-list {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #f1f3f4;
+            border-radius: 4px;
+            padding: 5px;
+            margin-top: 10px;
+        }
+
+        .name-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px;
+            background: #f8f9fa;
+            margin: 2px 0;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .delete-btn {
+            background: #ea4335 !important;
+            padding: 2px 6px !important;
+            font-size: 10px !important;
+            margin: 0 !important;
+        }
+
+        .delete-btn:hover {
+            background: #d33b2c !important;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Uygulamalar Paneli */
+        .apps-toggle {
+            position: fixed;
+            top: 20px;
+            right: 70px;
+            background: #34a853;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 20px;
+            z-index: 2001;
+            transition: all 0.2s ease;
+        }
+
+        .apps-toggle:hover {
+            background: #2d8e47;
+            transform: scale(1.1);
+        }
+
+        .apps-panel {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            background: #fff;
+            border: 1px solid #dadce0;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            width: 450px;
+            max-height: 80vh;
+            overflow-y: auto;
+            z-index: 2000;
+            transition: all 0.3s ease;
+        }
+
+        .apps-panel h3 {
+            margin-bottom: 15px;
+            color: #202124;
+            font-size: 18px;
+            border-bottom: 2px solid #f1f3f4;
+            padding-bottom: 10px;
+        }
+
+        .apps-category {
+            margin-bottom: 20px;
+        }
+
+        .apps-category h4 {
+            color: #5f6368;
+            font-size: 14px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .app-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: #202124;
+            background: #f8f9fa;
+        }
+
+        .app-item:hover {
+            background: #e8f0fe;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .app-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .app-name {
+            font-size: 11px;
+            text-align: center;
+            line-height: 1.2;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            color: #dadce0;
+            opacity: 0.6;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .apps-panel {
+                width: 90vw;
+                right: 5vw;
+            }
+            
+            .apps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <a href="#" class="logo">Linç</a>
-        </header>
-
-        <!-- Search Bar -->
-        <div class="search-container">
-            <div class="search-box">
-                <input type="text" class="search-input" placeholder="Ne arıyorsunuz?">
-                <button class="search-btn">🔍</button>
-            </div>
-        </div>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Ana Sayfa -->
-            <div id="home" class="page-content active">
-                <h2 class="section-title">Öne Çıkan Projeler</h2>
-                <div class="project-grid">
-                    <div class="project-card">
-                        <h3 class="project-title">Sevgili Sayacı Pro</h3>
-                        <p class="project-description">İlişkinizin ne kadar süredir devam ettiğini takip edin.</p>
-                        <a href="https://hakanaytas.github.io/sevgili-sayac-pro/" target="_blank" class="project-link">Ziyaret Et</a>
-                    </div>
-                    <div class="project-card">
-                        <h3 class="project-title">Pandora Arama</h3>
-                        <p class="project-description">Gelişmiş arama özelliklerine sahip arama motoru.</p>
-                        <a href="https://hakanaytas.github.io/pandora-arama-cubugu/" target="_blank" class="project-link">Ziyaret Et</a>
-                    </div>
-                    <div class="project-card">
-                        <h3 class="project-title">CV ve Dilekçe Oluşturucu</h3>
-                        <p class="project-description">Profesyonel CV ve dilekçe hazırlama aracı.</p>
-                        <a href="https://hakanaytas.github.io/cv-maker/" target="_blank" class="project-link">Ziyaret Et</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Projeler -->
-            <div id="projects" class="page-content">
-                <h2 class="section-title">Tüm Projeler</h2>
-                
-                <div class="category-section">
-                    <h3 class="category-title">Hesaplama Araçları</h3>
-                    <div class="project-grid">
-                        <div class="project-card">
-                            <h3 class="project-title">Yaş Hesaplama</h3>
-                            <p class="project-description">Doğum tarihine göre yaş hesaplama aracı.</p>
-                            <a href="https://hakanaytas.github.io/tarihge-g-re-ya-hesaplama-listesi/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                        <div class="project-card">
-                            <h3 class="project-title">Avans Hesaplama</h3>
-                            <p class="project-description">Maaş avans hesaplama sistemi.</p>
-                            <a href="https://hakanaytas.github.io/avans-hesaplama/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                        <div class="project-card">
-                            <h3 class="project-title">YouTube Kazanç</h3>
-                            <p class="project-description">YouTube izlenme başına kazanç hesaplama.</p>
-                            <a href="https://hakanaytas.github.io/YouTube-izlenme-ba-na-kazan-hesaplama/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                        <div class="project-card">
-                            <h3 class="project-title">Hesaplama Araçları</h3>
-                            <p class="project-description">Çeşitli matematiksel hesaplama araçları.</p>
-                            <a href="https://hakanaytas.github.io/Hesaplama-Ara-lar-/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="category-section">
-                    <h3 class="category-title">İş ve Finans</h3>
-                    <div class="project-grid">
-                        <div class="project-card">
-                            <h3 class="project-title">Muhasebe Pro</h3>
-                            <p class="project-description">Profesyonel muhasebe takip sistemi.</p>
-                            <a href="https://hakanaytas.github.io/muhasebe-pro-max/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                        <div class="project-card">
-                            <h3 class="project-title">Adisyon Sistemi</h3>
-                            <p class="project-description">Restoran adisyon yönetim sistemi.</p>
-                            <a href="https://hakanaytas.github.io/orjinal-adisyon-sistemi/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                        <div class="project-card">
-                            <h3 class="project-title">Kira Takibi</h3>
-                            <p class="project-description">Kira ödemelerini takip etme sistemi.</p>
-                            <a href="https://hakanaytas.github.io/kira-takibi-ve-daha-fazlas-/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                        <div class="project-card">
-                            <h3 class="project-title">Tostopia Adisyon</h3>
-                            <p class="project-description">Tost ve atıştırmalık adisyon sistemi.</p>
-                            <a href="https://hakanaytas.github.io/tostopia-adioo/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="category-section">
-                    <h3 class="category-title">Oyunlar</h3>
-                    <div class="project-grid">
-                        <div class="project-card">
-                            <h3 class="project-title">Satranç Öğrenme</h3>
-                            <p class="project-description">İnteraktif satranç öğrenme oyunu.</p>
-                            <a href="https://hakanaytas.github.io/santra-renme-oyunu/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                        <div class="project-card">
-                            <h3 class="project-title">Dama Oyunu</h3>
-                            <p class="project-description">Klasik dama oyunu Türkiye versiyonu.</p>
-                            <a href="https://hakanaytas.github.io/damat-rkiyee/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                        <div class="project-card">
-                            <h3 class="project-title">Cinayet Oyunu</h3>
-                            <p class="project-description">Dedektif cinayet çözme oyunu.</p>
-                            <a href="https://hakanaytas.github.io/c-nayet-oyunu/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                        <div class="project-card">
-                            <h3 class="project-title">Kurtlar Vadisi Quiz</h3>
-                            <p class="project-description">Kurtlar Vadisi bilgi yarışması.</p>
-                            <a href="https://hakanaytas.github.io/kurtlar-vadisi-quiz-oyunu/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="category-section">
-                    <h3 class="category-title">Araçlar ve Uygulamalar</h3>
-                    <div class="project-grid">
-                        <div class="project-card">
-                            <h3 class="project-title">Clock Pro</h3>
-                            <p class="project-description">Gelişmiş saat ve zamanlayıcı uygulaması.</p>
-                            <a href="https://hakanaytas.github.io/clock-pro/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                        <div class="project-card">
-                            <h3 class="project-title">Kolaj Maker</h3>
-                            <p class="project-description">Fotoğraf kolajı oluşturma aracı.</p>
-                            <a href="https://hakanaytas.github.io/kolaj-maker/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                        <div class="project-card">
-                            <h3 class="project-title">WhatsApp Analizi</h3>
-                            <p class="project-description">WhatsApp sohbet analiz aracı.</p>
-                            <a href="https://hakanaytas.github.io/whatsaap-analiz-pro/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                        <div class="project-card">
-                            <h3 class="project-title">Pattern Lock</h3>
-                            <p class="project-description">Desen kilit kırma aracı.</p>
-                            <a href="https://hakanaytas.github.io/Pattern-Lock-Breaker---Desen-Kilit-K-rma/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                        <div class="project-card">
-                            <h3 class="project-title">Plaket Oluşturucu</h3>
-                            <p class="project-description">Özel plaket tasarım aracı.</p>
-                            <a href="https://hakanaytas.github.io/plaketolusturucu/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="category-section">
-                    <h3 class="category-title">Kişisel ve Sosyal</h3>
-                    <div class="project-grid">
-                        <div class="project-card">
-                            <h3 class="project-title">Fitness Programı</h3>
-                            <p class="project-description">Kişisel fitness takip programı.</p>
-                            <a href="https://hakanaytas.github.io/fitnes-prog/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                        <div class="project-card">
-                            <h3 class="project-title">Zikirmatik</h3>
-                            <p class="project-description">Dijital zikirmatik uygulaması.</p>
-                            <a href="https://hakanaytas.github.io/zikirmatik/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                        <div class="project-card">
-                            <h3 class="project-title">Seviyor Sevmiyor</h3>
-                            <p class="project-description">Klasik seviyor sevmiyor oyunu.</p>
-                            <a href="https://hakanaytas.github.io/seviyor-sevmiyor/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                        <div class="project-card">
-                            <h3 class="project-title">Dua Kabul Zikri</h3>
-                            <p class="project-description">Dua ve zikir rehberi uygulaması.</p>
-                            <a href="https://hakanaytas.github.io/Allah-a-dua/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="category-section">
-                    <h3 class="category-title">Özel Sayaçlar</h3>
-                    <div class="project-grid">
-                        <div class="project-card">
-                            <h3 class="project-title">Vefat Sayacı</h3>
-                            <p class="project-description">Anma tarihi takip sayacı.</p>
-                            <a href="https://hakanaytas.github.io/suat-ayta--vafat-sayac-/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                        <div class="project-card">
-                            <h3 class="project-title">2026 Sınav Sayacı</h3>
-                            <p class="project-description">2026 sınavına kalan gün sayacı.</p>
-                            <a href="https://hakanaytas.github.io/2026s-navsayac-/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="category-section">
-                    <h3 class="category-title">Eğitim</h3>
-                    <div class="project-grid">
-                        <div class="project-card">
-                            <h3 class="project-title">YKS Test</h3>
-                            <p class="project-description">YKS sınavı hazırlık test uygulaması.</p>
-                            <a href="https://hakanaytas.github.io/YKS-Test/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                        <div class="project-card">
-                            <h3 class="project-title">Plan Seçici</h3>
-                            <p class="project-description">Eğitim planı seçim rehberi.</p>
-                            <a href="https://hakanaytas.github.io/plan-secici/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                        <div class="project-card">
-                            <h3 class="project-title">Manifesto</h3>
-                            <p class="project-description">Kişisel manifesto oluşturma aracı.</p>
-                            <a href="https://hakanaytas.github.io/manifesto/" target="_blank" class="project-link">Ziyaret Et</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- İletişim -->
-            <div id="contact" class="page-content">
-                <h2 class="section-title">İletişim Bilgileri</h2>
-                <div class="contact-info">
-                    <div class="contact-card">
-                        <span class="contact-icon">📱</span>
-                        <h3 class="contact-title">Instagram</h3>
-                        <p class="contact-detail">@hakan21aytas</p>
-                        <a href="https://www.instagram.com/hakan21aytas/" target="_blank" class="project-link">Takip Et</a>
-                    </div>
-                    <div class="contact-card">
-                        <span class="contact-icon">🎥</span>
-                        <h3 class="contact-title">YouTube</h3>
-                        <p class="contact-detail">@hakan21aytas</p>
-                        <a href="https://www.youtube.com/@hakan21aytas" target="_blank" class="project-link">Abone Ol</a>
-                    </div>
-                    <div class="contact-card">
-                        <span class="contact-icon">💻</span>
-                        <h3 class="contact-title">GitHub</h3>
-                        <p class="contact-detail">hakanaytas</p>
-                        <a href="https://github.com/hakanaytas" target="_blank" class="project-link">Profili Görüntüle</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Ayarlar -->
-            <div id="settings" class="page-content">
-                <h2 class="section-title">Site Ayarları</h2>
-                
-                <!-- Görünüm Ayarları -->
-                <div class="settings-section">
-                    <div class="settings-group">
-                        <h3 class="settings-title">🎨 Görünüm Ayarları</h3>
-                        <div class="settings-item">
-                            <div class="settings-label">
-                                <span class="settings-main-text">Karanlık Tema</span>
-                                <span class="settings-sub-text">Gece modu aktif et</span>
-                            </div>
-                            <div class="toggle-switch" id="darkMode" onclick="toggleSetting(this, 'darkMode')"></div>
-                        </div>
-                        <div class="settings-item">
-                            <div class="settings-label">
-                                <span class="settings-main-text">Animasyonlar</span>
-                                <span class="settings-sub-text">Sayfa geçiş efektleri</span>
-                            </div>
-                            <div class="toggle-switch active" onclick="toggleSetting(this, 'animations')"></div>
-                        </div>
-                        <div class="settings-item">
-                            <div class="settings-label">
-                                <span class="settings-main-text">Yüksek Kontrast</span>
-                                <span class="settings-sub-text">Erişilebilirlik için</span>
-                            </div>
-                            <div class="toggle-switch" onclick="toggleSetting(this, 'highContrast')"></div>
-                        </div>
-                        <div class="settings-item">
-                            <div class="settings-label">
-                                <span class="settings-main-text">Font Boyutu</span>
-                                <span class="settings-sub-text">Metin büyüklüğü ayarı</span>
-                            </div>
-                            <select class="settings-select" onchange="changeFontSize(this.value)">
-                                <option value="small">Küçük</option>
-                                <option value="medium" selected>Orta</option>
-                                <option value="large">Büyük</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Bildirim Ayarları -->
-                <div class="settings-section">
-                    <div class="settings-group">
-                        <h3 class="settings-title">🔔 Bildirim Ayarları</h3>
-                        <div class="settings-item">
-                            <div class="settings-label">
-                                <span class="settings-main-text">Yeni Proje Bildirimleri</span>
-                                <span class="settings-sub-text">Yeni içerik eklendiğinde bildir</span>
-                            </div>
-                            <div class="toggle-switch active" onclick="toggleSetting(this, 'newProject')"></div>
-                        </div>
-                        <div class="settings-item">
-                            <div class="settings-label">
-                                <span class="settings-main-text">Güncelleme Bildirimleri</span>
-                                <span class="settings-sub-text">Site güncellemelerini bildir</span>
-                            </div>
-                            <div class="toggle-switch" onclick="toggleSetting(this, 'updates')"></div>
-                        </div>
-                        <div class="settings-item">
-                            <div class="settings-label">
-                                <span class="settings-main-text">Haftalık Özet</span>
-                                <span class="settings-sub-text">Haftada bir özet mail gönder</span>
-                            </div>
-                            <div class="toggle-switch active" onclick="toggleSetting(this, 'weeklyDigest')"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Performans Ayarları -->
-                <div class="settings-section">
-                    <div class="settings-group">
-                        <h3 class="settings-title">⚡ Performans Ayarları</h3>
-                        <div class="settings-item">
-                            <div class="settings-label">
-                                <span class="settings-main-text">Hızlı Yükleme</span>
-                                <span class="settings-sub-text">Sayfalar daha hızlı yüklensin</span>
-                            </div>
-                            <div class="toggle-switch active" onclick="toggleSetting(this, 'fastLoading')"></div>
-                        </div>
-                        <div class="settings-item">
-                            <div class="settings-label">
-                                <span class="settings-main-text">Önbellek Kullan</span>
-                                <span class="settings-sub-text">Verileri yerel olarak sakla</span>
-                            </div>
-                            <div class="toggle-switch active" onclick="toggleSetting(this, 'useCache')"></div>
-                        </div>
-                        <div class="settings-item">
-                            <div class="settings-label">
-                                <span class="settings-main-text">Veri Tasarrufu</span>
-                                <span class="settings-sub-text">Daha az veri kullan</span>
-                            </div>
-                            <div class="toggle-switch" onclick="toggleSetting(this, 'dataSaver')"></div>
-                        </div>
-                        <div class="settings-item">
-                            <div class="settings-label">
-                                <span class="settings-main-text">Görsel Kalitesi</span>
-                                <span class="settings-sub-text">Resim kalite ayarı</span>
-                            </div>
-                            <input type="range" class="range-slider" min="1" max="5" value="3" onchange="changeImageQuality(this.value)">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Gizlilik Ayarları -->
-                <div class="settings-section">
-                    <div class="settings-group">
-                        <h3 class="settings-title">🔒 Gizlilik ve Güvenlik</h3>
-                        <div class="settings-item">
-                            <div class="settings-label">
-                                <span class="settings-main-text">Çerezleri Kabul Et</span>
-                                <span class="settings-sub-text">Site deneyimini iyileştir</span>
-                            </div>
-                            <div class="toggle-switch active" onclick="toggleSetting(this, 'cookies')"></div>
-                        </div>
-                        <div class="settings-item">
-                            <div class="settings-label">
-                                <span class="settings-main-text">Analitik Verileri</span>
-                                <span class="settings-sub-text">Anonim kullanım verileri topla</span>
-                            </div>
-                            <div class="toggle-switch" onclick="toggleSetting(this, 'analytics')"></div>
-                        </div>
-                        <div class="settings-item">
-                            <div class="settings-label">
-                                <span class="settings-main-text">Yerel Depolama</span>
-                                <span class="settings-sub-text">Ayarları cihazda sakla</span>
-                            </div>
-                            <div class="toggle-switch active" onclick="toggleSetting(this, 'localStorage')"></div>
-                        </div>
-                        <div class="settings-item">
-                            <div class="settings-label">
-                                <span class="settings-main-text">Otomatik Güncellemeler</span>
-                                <span class="settings-sub-text">Arka planda güncelle</span>
-                            </div>
-                            <div class="toggle-switch active" onclick="toggleSetting(this, 'autoUpdate')"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Site Yönetimi -->
-                <div class="settings-section">
-                    <div class="settings-group">
-                        <h3 class="settings-title">🛠️ Site Yönetimi</h3>
-                        <div class="settings-item">
-                            <div class="settings-label">
-                                <span class="settings-main-text">Önbelleği Temizle</span>
-                                <span class="settings-sub-text">Tüm geçici dosyaları sil</span>
-                            </div>
-                            <button class="settings-btn" onclick="clearCache()">Temizle</button>
-                        </div>
-                        <div class="settings-item">
-                            <div class="settings-label">
-                                <span class="settings-main-text">Ayarları Sıfırla</span>
-                                <span class="settings-sub-text">Tüm ayarları varsayılana döndür</span>
-                            </div>
-                            <button class="settings-btn danger" onclick="resetSettings()">Sıfırla</button>
-                        </div>
-                        <div class="settings-item">
-                            <div class="settings-label">
-                                <span class="settings-main-text">Dışa Aktar</span>
-                                <span class="settings-sub-text">Ayarları JSON olarak kaydet</span>
-                            </div>
-                            <button class="settings-btn" onclick="exportSettings()">Dışa Aktar</button>
-                        </div>
-                        <div class="settings-item">
-                            <div class="settings-label">
-                                <span class="settings-main-text">İçe Aktar</span>
-                                <span class="settings-sub-text">Ayarları JSON'dan yükle</span>
-                            </div>
-                            <input type="file" id="settingsFile" accept=".json" style="display:none" onchange="importSettings(this)">
-                            <button class="settings-btn" onclick="document.getElementById('settingsFile').click()">İçe Aktar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
+    <!-- Admin Toggle Button -->
+    <button class="admin-toggle" onclick="toggleAdmin()">⚙️</button>
+    
+    <!-- Apps Toggle Button -->
+    <button class="apps-toggle" onclick="toggleApps()">📱</button>
+    
+    <!-- Admin Panel -->
+    <div class="admin-panel hidden" id="adminPanel">
+        <h4>İsim Yönetimi</h4>
+        <input type="text" id="nameInput" placeholder="İsim girin">
+        <input type="text" id="messageInput" placeholder="Mesaj girin">
+        <br>
+        <button onclick="addName()">Ekle</button>
+        <button onclick="clearNames()">Tümünü Sil</button>
+        <div class="name-list" id="nameList"></div>
     </div>
 
-    <!-- Bottom Navigation - SABİT -->
-    <nav class="bottom-nav">
-        <div class="nav-item active" onclick="showPage('home', this)">
-            <span class="nav-icon">🏠</span>
-            <span class="nav-label">Ana Sayfa</span>
+    <!-- Apps Panel -->
+    <div class="apps-panel hidden" id="appsPanel">
+        <h3>🚀 Uygulamalarım</h3>
+        
+        <div class="apps-category">
+            <h4>📊 Hesaplama Araçları</h4>
+            <div class="apps-grid" id="calculatorApps"></div>
         </div>
-        <div class="nav-item" onclick="showPage('projects', this)">
-            <span class="nav-icon">📂</span>
-            <span class="nav-label">Projeler</span>
+
+        <div class="apps-category">
+            <h4>💼 İş ve Finans</h4>
+            <div class="apps-grid" id="businessApps"></div>
         </div>
-        <div class="nav-item" onclick="showPage('contact', this)">
-            <span class="nav-icon">📞</span>
-            <span class="nav-label">İletişim</span>
+
+        <div class="apps-category">
+            <h4>🎮 Oyunlar</h4>
+            <div class="apps-grid" id="gameApps"></div>
         </div>
-        <div class="nav-item" onclick="showPage('settings', this)">
-            <span class="nav-icon">⚙️</span>
-            <span class="nav-label">Ayarlar</span>
+
+        <div class="apps-category">
+            <h4>🛠️ Araçlar</h4>
+            <div class="apps-grid" id="toolApps"></div>
         </div>
-    </nav>
+
+        <div class="apps-category">
+            <h4>👤 Kişisel</h4>
+            <div class="apps-grid" id="personalApps"></div>
+        </div>
+
+        <div class="apps-category">
+            <h4>⏱️ Sayaçlar</h4>
+            <div class="apps-grid" id="counterApps"></div>
+        </div>
+
+        <div class="apps-category">
+            <h4>📚 Eğitim</h4>
+            <div class="apps-grid" id="educationApps"></div>
+        </div>
+
+        <div class="apps-category">
+            <h4>🔗 İletişim</h4>
+            <div class="apps-grid" id="socialApps"></div>
+        </div>
+    </div>
+
+    <div class="logo-container">
+        <div class="logo">
+            <h1 class="logo-text" id="logoText">
+                <span class="logo-p" onclick="changeLogoColor('blue')">P</span><span class="logo-a1" onclick="changeLogoColor('red')">a</span><span class="logo-n" onclick="changeLogoColor('yellow')">n</span><span class="logo-d" onclick="changeLogoColor('blue')">d</span><span class="logo-o" onclick="changeLogoColor('green')">o</span><span class="logo-r" onclick="changeLogoColor('red')">r</span><span class="logo-a2" onclick="changeLogoColor('blue')">a</span>
+            </h1>
+            <div class="country-info">🇹🇷 TR</div>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <div class="search-wrapper">
+            <svg class="search-icon" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="currentColor"></path>
+            </svg>
+            <input type="text" class="search-box" id="searchInput" autocomplete="off">
+        </div>
+        <div class="suggestions" id="suggestions"></div>
+    </div>
+
+    <div class="buttons">
+        <button class="btn">Pandora'da Ara</button>
+        <button class="btn">Kendimi Şanslı Hissediyorum</button>
+    </div>
+
+    <div class="footer">
+        hakan aytaş CodeBug 2025 bağlar diyarbakır hffhakan@gmail.com
+    </div>
 
     <script>
-        // Sayfa değiştirme fonksiyonu
-        function showPage(pageId, element) {
-            // Tüm sayfaları gizle
-            const pages = document.querySelectorAll('.page-content');
-            pages.forEach(page => page.classList.remove('active'));
-            
-            // Seçili sayfayı göster
-            document.getElementById(pageId).classList.add('active');
-            
-            // Nav butonlarından active sınıfını kaldır
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => item.classList.remove('active'));
-            
-            // Tıklanan butona active sınıfı ekle
-            element.classList.add('active');
-        }
+        const searchInput = document.getElementById('searchInput');
+        const suggestions = document.getElementById('suggestions');
+        const adminPanel = document.getElementById('adminPanel');
+        const appsPanel = document.getElementById('appsPanel');
+        const nameList = document.getElementById('nameList');
+        const logoText = document.getElementById('logoText');
+        let colorTimeout;
 
-        // Toast bildirimi gösterme
-        function showToast(message, type = 'success') {
-            // Mevcut toast'ları kaldır
-            const existingToasts = document.querySelectorAll('.toast');
-            existingToasts.forEach(toast => toast.remove());
+        // Uygulamalar veri yapısı
+        const apps = {
+            main: [
+                { name: 'Sevgili Sayaç Pro', url: 'https://hakanaytas.github.io/sevgili-sayac-pro/', icon: '💕', keywords: ['sevgili', 'sayaç', 'sayac', 'aşk', 'ask'] },
+                { name: 'Pandora Arama', url: 'https://hakanaytas.github.io/pandora-arama-cubugu/', icon: '🔍', keywords: ['pandora', 'arama', 'search'] },
+                { name: 'CV Maker', url: 'https://hakanaytas.github.io/cv-maker/', icon: '📄', keywords: ['cv', 'özgeçmiş', 'ozgecmis', 'resume'] }
+            ],
+            calculator: [
+                { name: 'Tarihe Göre Yaş Hesaplama', url: 'https://hakanaytas.github.io/tarihge-g-re-ya-hesaplama-listesi/', icon: '📅', keywords: ['yaş', 'yas', 'tarih', 'hesaplama', 'doğum', 'dogum'] },
+                { name: 'Avans Hesaplama', url: 'https://hakanaytas.github.io/avans-hesaplama/', icon: '💰', keywords: ['avans', 'hesaplama', 'maaş', 'maas', 'para'] },
+                { name: 'YouTube Kazanç Hesaplama', url: 'https://hakanaytas.github.io/YouTube-izlenme-ba-na-kazan-hesaplama/', icon: '📺', keywords: ['youtube', 'izlenme', 'kazanç', 'kazanc', 'video'] },
+                { name: 'Hesaplama Araçları', url: 'https://hakanaytas.github.io/Hesaplama-Ara-lar-/', icon: '🧮', keywords: ['hesap', 'hesaplama', 'calculator', 'araç', 'arac'] }
+            ],
+            business: [
+                { name: 'Muhasebe Pro Max', url: 'https://hakanaytas.github.io/muhasebe-pro-max/', icon: '📊', keywords: ['muhasebe', 'finans', 'hesap', 'gelir', 'gider'] },
+                { name: 'Adisyon Sistemi', url: 'https://hakanaytas.github.io/orjinal-adisyon-sistemi/', icon: '🧾', keywords: ['adisyon', 'hesap', 'restoran', 'fatura'] },
+                { name: 'Kira Takibi', url: 'https://hakanaytas.github.io/kira-takibi-ve-daha-fazlas-/', icon: '🏠', keywords: ['kira', 'takip', 'ev', 'ödeme', 'odeme'] },
+                { name: 'Tostopia Adisyon', url: 'https://hakanaytas.github.io/tostopia-adioo', icon: '🥪', keywords: ['tostopia', 'tost', 'adisyon', 'cafe'] },
+                { name: 'Ajanda', url: 'https://hakanaytas.github.io/ajanda/', icon: '📔', keywords: ['ajanda', 'not', 'planlama', 'takvim'] },
+                { name: 'Bağlar Bank', url: 'https://hakanaytas.github.io/baqlarbank/', icon: '🏦', keywords: ['bağlar', 'baglar', 'bank', 'banka', 'para'] }
+            ],
+            games: [
+                { name: 'Satranç Öğrenme', url: 'https://hakanaytas.github.io/santra-renme-oyunu/', icon: '♟️', keywords: ['satranç', 'satranc', 'öğrenme', 'ogrenme', 'oyun'] },
+                { name: 'Damat Türkiye', url: 'https://hakanaytas.github.io/damat-rkiyee/', icon: '🃏', keywords: ['damat', 'kağıt', 'kagit', 'oyun', 'türkiye', 'turkiye'] },
+                { name: 'Cinayet Oyunu', url: 'https://hakanaytas.github.io/c-nayet-oyunu/', icon: '🔪', keywords: ['cinayet', 'dedektif', 'oyun', 'gizem'] },
+                { name: 'Kurtlar Vadisi Quiz', url: 'https://hakanaytas.github.io/kurtlar-vadisi-quiz-oyunu/', icon: '🐺', keywords: ['kurtlar', 'vadisi', 'quiz', 'bilgi', 'oyun'] }
+            ],
+            tools: [
+                { name: 'Clock Pro', url: 'https://hakanaytas.github.io/clock-pro/', icon: '⏰', keywords: ['saat', 'clock', 'zaman', 'alarm'] },
+                { name: 'Kolaj Maker', url: 'https://hakanaytas.github.io/kolaj-maker/', icon: '🖼️', keywords: ['kolaj', 'resim', 'fotoğraf', 'fotograf', 'düzenle', 'duzenle'] },
+                { name: 'WhatsApp Analiz Pro', url: 'https://hakanaytas.github.io/whatsaap-analiz-pro/', icon: '💬', keywords: ['whatsapp', 'analiz', 'mesaj', 'chat'] },
+                { name: 'Pattern Lock Breaker', url: 'https://hakanaytas.github.io/Pattern-Lock-Breaker---Desen-Kilit-K-rma/', icon: '🔓', keywords: ['pattern', 'desen', 'kilit', 'şifre', 'sifre'] },
+                { name: 'Plaka Oluşturucu', url: 'https://hakanaytas.github.io/plaketolusturucu/', icon: '🚗', keywords: ['plaka', 'araç', 'arac', 'trafik'] }
+            ],
+            personal: [
+                { name: 'Fitness Programı', url: 'https://hakanaytas.github.io/fitnes-prog/', icon: '💪', keywords: ['fitness', 'spor', 'antrenman', 'sağlık', 'saglik'] },
+                { name: 'Zikirmatik', url: 'https://hakanaytas.github.io/zikirmatik/', icon: '📿', keywords: ['zikirmatik', 'zikir', 'dua', 'tesbih'] },
+                { name: 'Seviyor Sevmiyor', url: 'https://hakanaytas.github.io/seviyor-sevmiyor/', icon: '🌼', keywords: ['seviyor', 'sevmiyor', 'aşk', 'ask', 'oyun'] },
+                { name: 'Allah\'a Dua', url: 'https://hakanaytas.github.io/Allah-a-dua/', icon: '🤲', keywords: ['allah', 'dua', 'ibadet', 'namaz'] },
+                { name: 'Teveç\'uh Namaz Zikri', url: 'https://hakanaytas.github.io/tevecuh-namaz--zikri/', icon: '🕌', keywords: ['teveçuh', 'tevecuh', 'namaz', 'zikir', 'ibadet'] },
+                { name: 'Yaz Boz', url: 'https://hakanaytas.github.io/yaz-boz/', icon: '✍️', keywords: ['yaz', 'boz', 'not', 'yazı', 'yazi'] }
+            ],
+            counters: [
+                { name: 'Suat Aytaş Vefat Sayacı', url: 'https://hakanaytas.github.io/suat-ayta--vafat-sayac-/', icon: '🕊️', keywords: ['suat', 'aytaş', 'aytas', 'vefat', 'sayaç', 'sayac'] },
+                { name: '2026 Sınav Sayacı', url: 'https://hakanaytas.github.io/2026s-navsayac-/', icon: '📝', keywords: ['2026', 'sınav', 'sinav', 'sayaç', 'sayac', 'yks'] }
+            ],
+            education: [
+                { name: 'YKS Test', url: 'https://hakanaytas.github.io/YKS-Test/', icon: '📚', keywords: ['yks', 'test', 'sınav', 'sinav', 'üniversite', 'universite'] },
+                { name: 'Plan Seçici', url: 'https://hakanaytas.github.io/plan-secici/', icon: '🎯', keywords: ['plan', 'seçim', 'secim', 'karar', 'planlama'] },
+                { name: 'Manifesto', url: 'https://hakanaytas.github.io/manifesto/', icon: '📜', keywords: ['manifesto', 'hedef', 'plan', 'gelecek'] }
+            ],
+            social: [
+                { name: 'Instagram', url: 'https://www.instagram.com/hakan21aytas/', icon: '📷', keywords: ['instagram', 'sosyal', 'medya', 'foto'] },
+                { name: 'YouTube', url: 'https://www.youtube.com/@hakan21aytas', icon: '▶️', keywords: ['youtube', 'video', 'kanal', 'izle'] },
+                { name: 'GitHub', url: 'https://github.com/hakanaytas', icon: '💻', keywords: ['github', 'kod', 'code', 'developer'] }
+            ]
+        };
 
-            // Yeni toast oluştur
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            toast.textContent = message;
-            document.body.appendChild(toast);
+        // Tüm uygulamaları tek bir listede topla
+        const allApps = [
+            ...apps.main,
+            ...apps.calculator,
+            ...apps.business,
+            ...apps.games,
+            ...apps.tools,
+            ...apps.personal,
+            ...apps.counters,
+            ...apps.education,
+            ...apps.social
+        ];
 
-            // Göster
-            setTimeout(() => toast.classList.add('show'), 100);
+        // Uygulamaları render et
+        function renderApps() {
+            const categories = {
+                calculatorApps: apps.calculator,
+                businessApps: apps.business,
+                gameApps: apps.games,
+                toolApps: apps.tools,
+                personalApps: apps.personal,
+                counterApps: apps.counters,
+                educationApps: apps.education,
+                socialApps: apps.social
+            };
 
-            // Kaldır
-            setTimeout(() => {
-                toast.classList.remove('show');
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
-
-        // Ayar toggle fonksiyonu
-        function toggleSetting(element, settingName) {
-            element.classList.toggle('active');
-            const isActive = element.classList.contains('active');
-            
-            // LocalStorage'a kaydet
-            localStorage.setItem(settingName, isActive);
-            
-            // Özel işlemler
-            switch(settingName) {
-                case 'darkMode':
-                    if(isActive) {
-                        document.body.classList.add('dark-mode');
-                        showToast('Karanlık tema aktif edildi');
-                    } else {
-                        document.body.classList.remove('dark-mode');
-                        showToast('Açık tema aktif edildi');
-                    }
-                    break;
-                case 'animations':
-                    if(isActive) {
-                        showToast('Animasyonlar aktif edildi');
-                    } else {
-                        showToast('Animasyonlar devre dışı bırakıldı');
-                    }
-                    break;
-                default:
-                    showToast(`${settingName} ayarı güncellendi`);
-            }
-        }
-
-        // Font boyutu değiştirme
-        function changeFontSize(size) {
-            const root = document.documentElement;
-            switch(size) {
-                case 'small':
-                    root.style.fontSize = '14px';
-                    break;
-                case 'large':
-                    root.style.fontSize = '18px';
-                    break;
-                default:
-                    root.style.fontSize = '16px';
-            }
-            localStorage.setItem('fontSize', size);
-            showToast('Font boyutu güncellendi');
-        }
-
-        // Görsel kalitesi değiştirme
-        function changeImageQuality(quality) {
-            localStorage.setItem('imageQuality', quality);
-            showToast(`Görsel kalitesi ${quality}/5 olarak ayarlandı`);
-        }
-
-        // Önbelleği temizle
-        function clearCache() {
-            if('caches' in window) {
-                caches.keys().then(names => {
-                    names.forEach(name => {
-                        caches.delete(name);
-                    });
+            Object.keys(categories).forEach(catId => {
+                const container = document.getElementById(catId);
+                container.innerHTML = '';
+                categories[catId].forEach(app => {
+                    const appDiv = document.createElement('a');
+                    appDiv.className = 'app-item';
+                    appDiv.href = app.url;
+                    appDiv.target = '_blank';
+                    appDiv.innerHTML = `
+                        <div class="app-icon">${app.icon}</div>
+                        <div class="app-name">${app.name}</div>
+                    `;
+                    container.appendChild(appDiv);
                 });
+            });
+        }
+
+        // Logo renk değiştirme
+        function changeLogoColor(color) {
+            if (colorTimeout) {
+                clearTimeout(colorTimeout);
             }
-            // localStorage'ı temizle (ayarlar hariç)
-            const settings = {};
-            for(let key in localStorage) {
-                if(key.startsWith('setting_') || key === 'darkMode' || key === 'fontSize') {
-                    settings[key] = localStorage[key];
+            
+            logoText.className = 'logo-text';
+            logoText.classList.add('color-' + color);
+            
+            colorTimeout = setTimeout(() => {
+                logoText.className = 'logo-text';
+            }, 10000);
+        }
+
+        // Varsayılan öneriler
+        let customSuggestions = {
+            'şükran': [
+                'Şükran\'ı seviyorum ❤️',
+                'Şükran dünyanın en güzel kızı 🌟',
+                'Şükran benim her şeyim 💕',
+                'Şükran\'la geçen her an değerli ⭐'
+            ],
+            'sevgi': [
+                'Sevgi hayatımın anlamı 💖',
+                'Sevgim sonsuz 💕',
+                'Sevgi dolu anılar 🌹'
+            ],
+            'aşk': [
+                'Aşk her şeyin başlangıcı 💑',
+                'Aşkın büyüsü ✨',
+                'Aşk dolu kalp 💗'
+            ],
+            'anne': [
+                'Annem benim meleğim 👼',
+                'Anne sevgisi eşsiz 💝',
+                'Annem en güzel kadın 🌸'
+            ],
+            'annem': [
+                'Annem benim meleğim 👼',
+                'Annem hayatımın kahramanı 🦸‍♀️',
+                'Annem en değerlim 💎'
+            ],
+            'baba': [
+                'Babam benim kahramanım 🦸‍♂️',
+                'Baba sevgisi farklı 💪',
+                'Babam en güçlü 🔥'
+            ],
+            'babam': [
+                'Babam benim kahramanım 🦸‍♂️',
+                'Babam en güçlü adam 💪',
+                'Babam benim destekçim 🙌'
+            ]
+        };
+
+        // Local storage'dan özel isimleri yükle
+        function loadCustomNames() {
+            const saved = JSON.parse(localStorage.getItem('customNames') || '{}');
+            customSuggestions = { ...customSuggestions, ...saved };
+            updateNameList();
+        }
+
+        // Özel isimleri kaydet
+        function saveCustomNames() {
+            const customNames = {};
+            Object.keys(customSuggestions).forEach(key => {
+                if (!['şükran', 'sevgi', 'aşk', 'anne', 'annem', 'baba', 'babam'].includes(key)) {
+                    customNames[key] = customSuggestions[key];
                 }
-            }
-            localStorage.clear();
-            for(let key in settings) {
-                localStorage[key] = settings[key];
-            }
-            showToast('Önbellek temizlendi');
+            });
+            localStorage.setItem('customNames', JSON.stringify(customNames));
         }
 
-        // Ayarları sıfırla
-        function resetSettings() {
-            if(confirm('Tüm ayarlar varsayılan değerlerine döndürülecek. Emin misiniz?')) {
-                localStorage.clear();
-                location.reload();
+        // Admin panelini aç/kapat
+        function toggleAdmin() {
+            adminPanel.classList.toggle('hidden');
+            if (!adminPanel.classList.contains('hidden')) {
+                appsPanel.classList.add('hidden');
             }
         }
 
-        // Ayarları dışa aktar
-        function exportSettings() {
-            const settings = {};
-            for(let key in localStorage) {
-                settings[key] = localStorage[key];
+        // Apps panelini aç/kapat
+        function toggleApps() {
+            appsPanel.classList.toggle('hidden');
+            if (!appsPanel.classList.contains('hidden')) {
+                adminPanel.classList.add('hidden');
             }
-            const dataStr = JSON.stringify(settings, null, 2);
-            const dataBlob = new Blob([dataStr], {type: 'application/json'});
-            const url = URL.createObjectURL(dataBlob);
+        }
+
+        // İsim ekle
+        function addName() {
+            const name = document.getElementById('nameInput').value.trim().toLowerCase();
+            const message = document.getElementById('messageInput').value.trim();
             
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'linc_ayarlar.json';
-            link.click();
-            
-            URL.revokeObjectURL(url);
-            showToast('Ayarlar dışa aktarıldı');
-        }
-
-        // Ayarları içe aktar
-        function importSettings(input) {
-            const file = input.files[0];
-            if(file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    try {
-                        const settings = JSON.parse(e.target.result);
-                        for(let key in settings) {
-                            localStorage.setItem(key, settings[key]);
-                        }
-                        showToast('Ayarlar içe aktarıldı. Sayfa yenileniyor...');
-                        setTimeout(() => location.reload(), 2000);
-                    } catch(error) {
-                        showToast('Hatalı dosya formatı', 'error');
-                    }
-                };
-                reader.readAsText(file);
-            }
-        }
-
-        // Arama fonksiyonu
-        document.querySelector('.search-input').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const projectCards = document.querySelectorAll('.project-card');
-            let foundCount = 0;
-            
-            projectCards.forEach(card => {
-                const title = card.querySelector('.project-title').textContent.toLowerCase();
-                const description = card.querySelector('.project-description').textContent.toLowerCase();
+            if (name && message) {
+                if (!customSuggestions[name]) {
+                    customSuggestions[name] = [];
+                }
+                customSuggestions[name].push(message);
                 
-                if (title.includes(searchTerm) || description.includes(searchTerm) || searchTerm === '') {
-                    card.style.display = 'block';
-                    if(searchTerm !== '') foundCount++;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            // Kategori başlıklarını kontrol et
-            if(searchTerm !== '') {
-                const categories = document.querySelectorAll('.category-section');
-                categories.forEach(category => {
-                    const visibleCards = category.querySelectorAll('.project-card[style="display: block"], .project-card:not([style])');
-                    if(visibleCards.length === 0) {
-                        category.style.display = 'none';
-                    } else {
-                        category.style.display = 'block';
-                    }
-                });
+                document.getElementById('nameInput').value = '';
+                document.getElementById('messageInput').value = '';
+                
+                saveCustomNames();
+                updateNameList();
+                
+                alert('İsim ve mesaj eklendi!');
             } else {
-                const categories = document.querySelectorAll('.category-section');
-                categories.forEach(category => {
-                    category.style.display = 'block';
-                });
+                alert('Lütfen isim ve mesaj girin!');
             }
-        });
+        }
 
-        // Sayfa yüklendiğinde ayarları uygula
-        document.addEventListener('DOMContentLoaded', function() {
-            // Dark mode kontrolü
-            if(localStorage.getItem('darkMode') === 'true') {
-                document.body.classList.add('dark-mode');
-                document.getElementById('darkMode').classList.add('active');
-            }
-
-            // Font size kontrolü
-            const fontSize = localStorage.getItem('fontSize') || 'medium';
-            changeFontSize(fontSize);
-            document.querySelector(`option[value="${fontSize}"]`).selected = true;
-
-            // Diğer ayarları yükle
-            const settings = [
-                'animations', 'highContrast', 'newProject', 'updates', 
-                'weeklyDigest', 'fastLoading', 'useCache', 'dataSaver',
-                'cookies', 'analytics', 'localStorage', 'autoUpdate'
-            ];
-
-            settings.forEach(setting => {
-                const value = localStorage.getItem(setting);
-                if(value === 'true' || value === 'false') {
-                    const element = document.querySelector(`[onclick*="${setting}"]`);
-                    if(element && value === 'true') {
-                        element.classList.add('active');
-                    } else if(element && value === 'false') {
-                        element.classList.remove('active');
+        // Tüm özel isimleri sil
+        function clearNames() {
+            if (confirm('Tüm özel isimleri silmek istediğinizden emin misiniz?')) {
+                Object.keys(customSuggestions).forEach(key => {
+                    if (!['şükran', 'sevgi', 'aşk', 'anne', 'annem', 'baba', 'babam'].includes(key)) {
+                        delete customSuggestions[key];
                     }
-                }
-            });
-
-            // Kartları animate et
-            const cards = document.querySelectorAll('.project-card, .contact-card');
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                setTimeout(() => {
-                    card.style.transition = 'all 0.5s ease';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, index * 100);
-            });
-        });
-
-        // Keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if(e.key === 'Escape') {
-                // Ana sayfaya dön
-                showPage('home', document.querySelector('.nav-item'));
-            }
-            
-            if(e.key >= '1' && e.key <= '4') {
-                // Sayı tuşları ile navigation
-                const pages = ['home', 'projects', 'contact', 'settings'];
-                const index = parseInt(e.key) - 1;
-                if(pages[index]) {
-                    const navItem = document.querySelectorAll('.nav-item')[index];
-                    showPage(pages[index], navItem);
-                }
-            }
-        });
-
-        // Service Worker register (PWA için)
-        if('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js').then(function(registration) {
-                    console.log('ServiceWorker registration successful');
-                }, function(err) {
-                    console.log('ServiceWorker registration failed: ', err);
                 });
+                localStorage.removeItem('customNames');
+                updateNameList();
+                alert('Tüm özel isimler silindi!');
+            }
+        }
+
+        // İsim listesini güncelle
+        function updateNameList() {
+            nameList.innerHTML = '';
+            Object.keys(customSuggestions).forEach(name => {
+                if (!['şükran', 'sevgi', 'aşk', 'anne', 'annem', 'baba', 'babam'].includes(name)) {
+                    customSuggestions[name].forEach((message, index) => {
+                        const div = document.createElement('div');
+                        div.className = 'name-item';
+                        div.innerHTML = `
+                            <span><strong>${name}:</strong> ${message}</span>
+                            <button class="delete-btn" onclick="deleteName('${name}', ${index})">Sil</button>
+                        `;
+                        nameList.appendChild(div);
+                    });
+                }
             });
         }
+
+        // Belirli bir isim-mesaj çiftini sil
+        function deleteName(name, index) {
+            customSuggestions[name].splice(index, 1);
+            if (customSuggestions[name].length === 0) {
+                delete customSuggestions[name];
+            }
+            saveCustomNames();
+            updateNameList();
+        }
+
+        function showSuggestions(query) {
+            suggestions.innerHTML = '';
+            
+            if (!query.trim()) {
+                suggestions.classList.remove('show');
+                return;
+            }
+
+            let foundSuggestions = [];
+            let foundApps = [];
+            
+            // Uygulama araması
+            const lowerQuery = query.toLowerCase();
+            allApps.forEach(app => {
+                const matchesName = app.name.toLowerCase().includes(lowerQuery);
+                const matchesKeywords = app.keywords.some(keyword => 
+                    keyword.includes(lowerQuery) || lowerQuery.includes(keyword)
+                );
+                
+                if (matchesName || matchesKeywords) {
+                    foundApps.push(app);
+                }
+            });
+            
+            // Tam eşleşme ara
+            if (customSuggestions[query.toLowerCase()]) {
+                foundSuggestions = [...customSuggestions[query.toLowerCase()]];
+            }
+            
+            // Kısmi eşleşme ara
+            if (foundSuggestions.length === 0) {
+                Object.keys(customSuggestions).forEach(key => {
+                    if (key.includes(query.toLowerCase()) || query.toLowerCase().includes(key)) {
+                        foundSuggestions = [...foundSuggestions, ...customSuggestions[key]];
+                    }
+                });
+            }
+
+            // Sonuç yoksa
+            if (foundSuggestions.length === 0 && foundApps.length === 0) {
+                suggestions.innerHTML = '<div class="no-results">Bu kelime için özel mesaj veya uygulama bulunamadı...</div>';
+                suggestions.classList.add('show');
+                return;
+            }
+
+            // Benzersiz önerileri göster
+            foundSuggestions = [...new Set(foundSuggestions)];
+            
+            // Uygulamaları önce göster
+            foundApps.forEach(app => {
+                const div = document.createElement('div');
+                div.className = 'suggestion-item';
+                
+                const icon = document.createElement('div');
+                icon.className = 'suggestion-icon';
+                icon.innerHTML = app.icon;
+                
+                const text = document.createElement('div');
+                text.className = 'suggestion-text';
+                text.textContent = app.name;
+                
+                div.appendChild(icon);
+                div.appendChild(text);
+                
+                div.onclick = function() {
+                    window.open(app.url, '_blank');
+                };
+                
+                suggestions.appendChild(div);
+            });
+            
+            // Mesajları göster
+            foundSuggestions.forEach(suggestion => {
+                const div = document.createElement('div');
+                div.className = 'suggestion-item';
+                
+                const icon = document.createElement('div');
+                icon.className = 'suggestion-icon';
+                icon.innerHTML = '🔍';
+                
+                const text = document.createElement('div');
+                text.className = 'suggestion-text';
+                text.textContent = suggestion;
+                
+                div.appendChild(icon);
+                div.appendChild(text);
+                
+                div.onclick = function() {
+                    searchInput.value = suggestion;
+                    suggestions.classList.remove('show');
+                };
+                
+                suggestions.appendChild(div);
+            });
+            
+            suggestions.classList.add('show');
+        }
+
+        searchInput.addEventListener('input', function() {
+            showSuggestions(this.value);
+        });
+
+        searchInput.addEventListener('focus', function() {
+            if (this.value.trim()) {
+                showSuggestions(this.value);
+            }
+        });
+
+        // Dışarı tıklandığında önerileri gizle
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.search-container')) {
+                suggestions.classList.remove('show');
+            }
+            if (!e.target.closest('.admin-panel') && !e.target.closest('.admin-toggle')) {
+                adminPanel.classList.add('hidden');
+            }
+            if (!e.target.closest('.apps-panel') && !e.target.closest('.apps-toggle')) {
+                appsPanel.classList.add('hidden');
+            }
+        });
+
+        // Enter tuşuna basıldığında
+        searchInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const firstSuggestion = suggestions.querySelector('.suggestion-item');
+                if (firstSuggestion) {
+                    const suggestionText = firstSuggestion.querySelector('.suggestion-text');
+                    if (suggestionText) {
+                        searchInput.value = suggestionText.textContent;
+                        suggestions.classList.remove('show');
+                    }
+                }
+            }
+        });
+
+        // Enter ile isim ekleme
+        document.getElementById('messageInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                addName();
+            }
+        });
+
+        // Sayfa yüklendiğinde
+        loadCustomNames();
+        renderApps();
     </script>
 </body>
 </html>
